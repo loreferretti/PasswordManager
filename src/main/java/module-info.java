@@ -1,4 +1,4 @@
-module it.passwordmanager.passwordmanager {
+module it.passwordmanager {
     requires javafx.controls;
     requires javafx.fxml;
 
