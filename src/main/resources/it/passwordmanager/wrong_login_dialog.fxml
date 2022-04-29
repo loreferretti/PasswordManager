@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="it.passwordmanager.WrongLoginDialog"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #e5e5e5;"
+            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.passwordmanager.businessLogic.WrongLoginDialogController">
+    <children>
+        <Label alignment="CENTER" layoutX="50.0" layoutY="31.0" prefHeight="50.0" prefWidth="300.0" text="The password is wrong!" textAlignment="CENTER">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <Button alignment="CENTER" layoutX="160.0" layoutY="126.0" mnemonicParsing="false" onAction="#onRETRYButtonClick" prefHeight="25.0" prefWidth="80.0" text="RETRY">
+            <style>
+                -fx-background-radius: 15,15;
+                -fx-text-fill: white;
+                -fx-background-color: #D20000;
+            </style>
+        </Button>
+    </children>
 </AnchorPane>
