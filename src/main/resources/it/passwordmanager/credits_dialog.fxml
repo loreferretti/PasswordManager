@@ -10,27 +10,24 @@
 <VBox maxHeight="250.0" maxWidth="400.0" minHeight="250.0" minWidth="400.0" prefHeight="250.0" prefWidth="400.0"
       xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #E5E5E5;"
       fx:controller="it.passwordmanager.businessLogic.CreditsDialogController">
-    <children>
-        <Pane prefHeight="25.0" prefWidth="400.0" />
-        <HBox prefHeight="150.0" prefWidth="400.0">
-            <children>
-                <Pane prefHeight="150.0" prefWidth="50.0" />
-                <Label alignment="CENTER" prefHeight="150.0" prefWidth="300.0" text="This Password Manager is a project developed by Lorenzo Ferretti and Tommaso Gualtierotti for a software engineering exam in the bachelor's degree in computer engineering at the University of Florence" textAlignment="CENTER" wrapText="true">
-                    <font>
-                        <Font size="16.0" />
-                    </font>
-                </Label>
-                <Pane prefHeight="150.0" prefWidth="50.0" />
-            </children>
-        </HBox>
-        <Pane prefHeight="25.0" prefWidth="400.0" />
-        <HBox prefHeight="25.0" prefWidth="400.0">
-            <children>
-                <Pane prefHeight="25.0" prefWidth="160.0" />
-                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Close" onAction="#onCloseAboutButtonClick"/>
-                <Pane prefHeight="25.0" prefWidth="160.0" />
-            </children>
-        </HBox>
-        <Pane prefHeight="25.0" prefWidth="400.0" />
-    </children>
+    <Pane prefHeight="25.0" prefWidth="400.0"/>
+    <HBox prefHeight="150.0" prefWidth="400.0">
+        <Pane prefHeight="150.0" prefWidth="50.0"/>
+        <Label alignment="CENTER" prefHeight="150.0" prefWidth="300.0"
+               text="This Password Manager is a project developed by Lorenzo Ferretti and Tommaso Gualtierotti for a software engineering exam in the bachelor's degree in computer engineering at the University of Florence"
+               textAlignment="CENTER" wrapText="true">
+            <font>
+                <Font size="16.0"/>
+            </font>
+        </Label>
+        <Pane prefHeight="150.0" prefWidth="50.0"/>
+    </HBox>
+    <Pane prefHeight="25.0" prefWidth="400.0"/>
+    <HBox prefHeight="25.0" prefWidth="400.0">
+        <Pane prefHeight="25.0" prefWidth="160.0"/>
+        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Close"
+                onAction="#onCloseButtonClick"/>
+        <Pane prefHeight="25.0" prefWidth="160.0"/>
+    </HBox>
+    <Pane prefHeight="25.0" prefWidth="400.0"/>
 </VBox>
