@@ -9,6 +9,12 @@ public class LoginController {
 
     private Dao<Login> proxy;
 
+    public LoginController() {
+
+        proxy = new AuthenticationProxy();
+
+    }
+
     public boolean addLogin(Login login) {
         return false;
     }
@@ -28,4 +34,13 @@ public class LoginController {
     public boolean encrypt(int cipherMode) {
         return false;
     }
+
+    public boolean storeAndEncryptPassword(String password) {
+        return false;
+    }
+
+    public boolean authenticate(String password) {
+        return false;
+    }
+
 }
