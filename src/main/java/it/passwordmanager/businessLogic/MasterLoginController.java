@@ -76,5 +76,22 @@ public class MasterLoginController implements Initializable {
 
     }
 
+    @FXML
+    protected void onAboutButtonClick(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("credits_dialog.fxml"));
+
+        Stage creditsStage = new Stage();
+
+        Scene scene = new Scene(fxmlLoader.load());
+
+        creditsStage.setTitle("Credits");
+        creditsStage.setScene(scene);
+        creditsStage.setResizable(false);
+
+        creditsStage.show();
+        creditsStage.centerOnScreen();
+
+    }
 
 }
