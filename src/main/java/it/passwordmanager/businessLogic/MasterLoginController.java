@@ -69,7 +69,12 @@ public class MasterLoginController implements Initializable {
 
     }
 
+    @FXML
+    protected void onQuitButtonClick(ActionEvent event) {
 
+        javafx.application.Platform.exit();
+
+    }
 
 
 }
