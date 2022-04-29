@@ -1,4 +1,4 @@
-package it.passwordmanager.domanModel;
+package it.passwordmanager.domainModel;
 
 public class Login {
     private String website;

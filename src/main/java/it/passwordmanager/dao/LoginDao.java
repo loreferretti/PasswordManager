@@ -1,6 +1,6 @@
 package it.passwordmanager.dao;
 
-import it.passwordmanager.domanModel.Login;
+import it.passwordmanager.domainModel.Login;
 
 import java.util.List;
 import java.util.function.Predicate;
