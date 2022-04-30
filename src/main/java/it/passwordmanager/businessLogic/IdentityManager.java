@@ -27,8 +27,8 @@ public class IdentityManager {
 
     private boolean checkLogin(String password, byte[] masterPassword, byte[] salt) {
         EncryptionService encryptionService = new EncryptionService();
-        byte[] passwordEncrypted = encryptionService.getEncryptedPassword(password, salt);
-        return Arrays.equals(masterPassword, passwordEncrypted);
+        byte[] masterPasswordEncrypted = encryptionService.getEncryptedPassword(password, salt);
+        return Arrays.equals(masterPassword, masterPasswordEncrypted);
     }
 
 }
