@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class LoginDao implements Dao<Login> {
 
@@ -55,8 +54,26 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public List<Login> read(Predicate predicate) {
-        return null;
+    public List<Login> read(Object obj) {
+        Connection connection = ConnectionFactory.getConnection();
+        String query = "select * from Login where website = ?";
+
+        try {
+            PreparedStatement pstat = connection.prepareStatement(query);
+            pstat.setString(1, String.valueOf(obj));
+
+            ResultSet rs = pstat.executeQuery();
+            ArrayList<Login>  logins = new ArrayList<Login>();
+            while(rs.next()) {
+                String website = rs.getString("website");
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                logins.add(new Login(website,username,password));
+            }
+            return logins;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
