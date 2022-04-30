@@ -4,12 +4,24 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
 
 public class EncryptionService {
     public byte[] getEncryptedPassword(String password, byte[] salt) {
-        return null;
+        try {
+            String algorithm = "PBKDF2WithHmacSHA1";
+            int derivedKeyLength = 160;
+            int iterations = 20000;
+            KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength);
+            SecretKeyFactory f =  SecretKeyFactory.getInstance(algorithm);
+            return f.generateSecret(spec).getEncoded();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeySpecException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public byte[] generateSalt() {
