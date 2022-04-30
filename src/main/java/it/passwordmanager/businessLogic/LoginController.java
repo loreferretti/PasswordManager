@@ -16,19 +16,19 @@ public class LoginController {
     }
 
     public boolean addLogin(Login login) {
-        return false;
+        return proxy.create(login);
     }
 
     public boolean updateLogin(Login login) {
-        return false;
+        return proxy.update(login);
     }
 
     public boolean deleteLogin(Login login) {
-        return false;
+        return proxy.delete(login);
     }
 
     public List<Login> searchByWebsite(String website) {
-        return null;
+        return proxy.read(website);
     }
 
     public boolean encrypt(int cipherMode) {
