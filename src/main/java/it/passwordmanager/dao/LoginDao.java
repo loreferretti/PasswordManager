@@ -22,10 +22,8 @@ public class LoginDao implements Dao<Login> {
 
             ArrayList<Login>  logins = new ArrayList<Login>();
             while(rs.next()) {
-                String website = rs.getString("website");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                logins.add(new Login(website,username,password));
+                Login login = extractLogin(rs);
+                logins.add(login);
             }
             return logins;
 
@@ -65,10 +63,8 @@ public class LoginDao implements Dao<Login> {
             ResultSet rs = pstat.executeQuery();
             ArrayList<Login>  logins = new ArrayList<Login>();
             while(rs.next()) {
-                String website = rs.getString("website");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                logins.add(new Login(website,username,password));
+                Login login = extractLogin(rs);
+                logins.add(login);
             }
             return logins;
         } catch (SQLException e) {
@@ -97,6 +93,16 @@ public class LoginDao implements Dao<Login> {
         }
 
         return valid;
+
+    }
+
+    private Login extractLogin(ResultSet rs) throws SQLException {
+        String website = rs.getString("website");
+        String username = rs.getString("username");
+        String password = rs.getString("password");
+
+        Login login = new Login(website, username, password);
+        return login;
 
     }
 }
