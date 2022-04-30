@@ -66,6 +66,20 @@ public class LoginDao implements Dao<Login> {
 
     @Override
     public boolean delete(Login login) {
-        return false;
+        Connection connection = ConnectionFactory.getConnection();
+        String query = "delete from Login where website = ?, username = ?, password = ?;";
+        boolean valid = false;
+        try {
+            PreparedStatement pstat = connection.prepareStatement(query);
+            pstat.setString(1, login.getWebsite());
+            pstat.setString(2,login.getUsername());
+            pstat.setString(3, login.getPassword());
+            valid = pstat.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return valid;
+
     }
 }
