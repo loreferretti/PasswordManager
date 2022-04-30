@@ -18,7 +18,7 @@ public class AuthenticationProxy implements Dao<Login> {
     }
 
     @Override
-    public List<Login> read(Predicate predicate) {
+    public List<Login> read(Object obj) {
         return null;
     }
 
