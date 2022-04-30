@@ -5,7 +5,13 @@ import java.util.Random;
 public class PasswordGenerator {
 
     public String generate(int length) {
-        return "";
+        String alphabet = getAlphabet();
+        String password = "";
+        Random rand = new Random();
+        for(int i = 0; i < length; i++) {
+            password += alphabet.charAt(rand.nextInt(alphabet.length()));
+        }
+        return password;
     }
 
     private String getAlphabet() {
