@@ -25,4 +25,10 @@ public class IdentityManager {
         return valid;
     }
 
+    private boolean checkLogin(String password, byte[] masterPassword, byte[] salt) {
+        EncryptionService encryptionService = new EncryptionService();
+        byte[] passwordEncrypted = encryptionService.getEncryptedPassword(password, salt);
+        return Arrays.equals(masterPassword, passwordEncrypted);
+    }
+
 }
