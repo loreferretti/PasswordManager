@@ -102,6 +102,30 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
+    protected void handleEditLoginClick(ActionEvent event) {
+
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("edit_login_window.fxml"));
+
+            Stage editStage = new Stage();
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            editStage.initModality(Modality.APPLICATION_MODAL);
+
+
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+
 
 
 }
