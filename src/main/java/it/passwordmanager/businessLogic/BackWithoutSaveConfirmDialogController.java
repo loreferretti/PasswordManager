@@ -37,6 +37,15 @@ public class BackWithoutSaveConfirmDialogController {
 
     }
 
+    @FXML
+    protected void onYesButtonClick(ActionEvent event) {
 
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        stage.close();
+
+        addLoginControllerParent.closeStage();
+
+    }
 
 }
