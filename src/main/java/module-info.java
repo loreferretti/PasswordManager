@@ -5,5 +5,7 @@ module it.passwordmanager {
 
 
     opens it.passwordmanager to javafx.fxml;
+    opens it.passwordmanager.businessLogic to javafx.fxml;
+
     exports it.passwordmanager;
 }
