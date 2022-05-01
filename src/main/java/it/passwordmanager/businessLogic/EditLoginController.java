@@ -65,5 +65,50 @@ public class EditLoginController{
 
     }
 
+    @FXML
+    protected void onBackButtonClick(ActionEvent event) {
+
+        try {
+
+            if(!editWebsite.getText().equals(login.getWebsite()) || !editWebsite.getText().equals(login.getUsername())
+                    || !editPassword.getText().equals(login.getPassword())) {
+
+                FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("back_without_save_confirm_dialog.fxml"));
+
+                Stage dontSaveConfirmDialogStage = new Stage();
+
+                Scene scene = new Scene(fxmlLoader.load());
+
+                BackWithoutSaveConfirmDialogController backWithoutSaveConfirmDialogController = fxmlLoader.getController();
+
+                backWithoutSaveConfirmDialogController.initialize(this);
+
+                dontSaveConfirmDialogStage.setScene(scene);
+
+                dontSaveConfirmDialogStage.setTitle("Warning");
+                dontSaveConfirmDialogStage.setResizable(false);
+                dontSaveConfirmDialogStage.initModality(Modality.APPLICATION_MODAL);
+
+                dontSaveConfirmDialogStage.show();
+                dontSaveConfirmDialogStage.centerOnScreen();
+
+            }
+            else {
+
+                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+                stage.close();
+
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+
 
 }
