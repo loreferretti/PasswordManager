@@ -110,5 +110,44 @@ public class EditLoginController{
 
     }
 
+    @FXML
+    protected void onSaveButtonClick(ActionEvent event) {
 
+        if (!editWebsite.getText().equals(login.getWebsite()) || !editWebsite.getText().equals(login.getUsername())
+                || !editPassword.getText().equals(login.getPassword())) {
+
+            Login newLogin = new Login(editWebsite.getText(), editUsername.getText(), editPassword.getText());
+
+            loginController.updateLogin(login, newLogin);
+
+            login = newLogin;
+        }
+
+        try {
+
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("show_login_window.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            ShowLoginController showLoginController = fxmlLoader.getController();
+
+            showLoginController.initialize(login);
+
+            stage.setTitle("Show Login");
+            stage.setScene(scene);
+            stage.setResizable(false);
+
+            stage.show();
+            stage.centerOnScreen();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
+    }
 }
