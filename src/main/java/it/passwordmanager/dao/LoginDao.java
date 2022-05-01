@@ -74,7 +74,25 @@ public class LoginDao implements Dao<Login> {
 
     @Override
     public boolean update(Login oldLogin, Login newLogin) {
-        return false;
+        Connection connection = ConnectionFactory.getConnection();
+        String query = "update Login set website = ?, username = ?, password = ? where website = ?, username = ?, password = ?;";
+        boolean valid = false;
+        try {
+            PreparedStatement pstat = connection.prepareStatement(query);
+            pstat.setString(1, newLogin.getWebsite());
+            pstat.setString(2, newLogin.getUsername());
+            pstat.setString(3, newLogin.getPassword());
+
+            pstat.setString(4, oldLogin.getWebsite());
+            pstat.setString(5, oldLogin.getUsername());
+            pstat.setString(6, oldLogin.getPassword());
+
+            valid = pstat.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return valid;
     }
 
     @Override
