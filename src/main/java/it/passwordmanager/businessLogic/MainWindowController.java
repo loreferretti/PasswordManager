@@ -139,6 +139,48 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
+    protected void handleCopyWebsiteClick(ActionEvent event) {
+
+        String website = loginTable.getSelectionModel().getSelectedItem().getWebsite();
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+
+        ClipboardContent content = new ClipboardContent();
+        content.putString(website);
+
+        clipboard.setContent(content);
+
+    }
+
+    @FXML
+    protected void handleCopyUsernameClick(ActionEvent event) {
+
+        String website = loginTable.getSelectionModel().getSelectedItem().getUsername();
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+
+        ClipboardContent content = new ClipboardContent();
+        content.putString(website);
+
+        clipboard.setContent(content);
+
+    }
+
+    @FXML
+    protected void handleCopyPasswordClick(ActionEvent event) {
+
+        String website = loginTable.getSelectionModel().getSelectedItem().getPassword();
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+
+        ClipboardContent content = new ClipboardContent();
+        content.putString(website);
+
+        clipboard.setContent(content);
+
+    }
+
 
 
 }
