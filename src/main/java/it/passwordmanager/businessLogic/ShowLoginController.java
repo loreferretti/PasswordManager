@@ -142,7 +142,36 @@ public class ShowLoginController {
 
     }
 
+    @FXML
+    protected void onDeleteButtonClick(ActionEvent event) {
 
+        try {
+
+            Stage deleteConfirmStage = new Stage();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("delete_confirm_dialog.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            DeleteConfirmDialogController deleteConfirmDialogController = fxmlLoader.getController();
+
+            deleteConfirmDialogController.initialize(this, login);
+
+            deleteConfirmStage.setTitle("Delete Confirmation");
+            deleteConfirmStage.setScene(scene);
+            deleteConfirmStage.setResizable(false);
+
+            deleteConfirmStage.show();
+            deleteConfirmStage.centerOnScreen();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
+    }
 
 
 }
