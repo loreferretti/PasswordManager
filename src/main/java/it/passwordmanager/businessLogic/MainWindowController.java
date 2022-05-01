@@ -126,6 +126,19 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
+    protected void handleDeleteLoginClick(ActionEvent event) {
+
+        Login login = loginTable.getSelectionModel().getSelectedItem();
+
+        loginController.deleteLogin(login);
+
+        //refreshTable
+
+        //FIXME think about how to do the refresh of the list, whether do it in loginDao model or similar or do it here
+
+    }
+
 
 
 }
