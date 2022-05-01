@@ -59,6 +59,51 @@ public class ShowLoginController {
     }
 
     @FXML
+    protected void closeStage() {
+
+        Stage stage = (Stage) (website.getScene().getWindow());
+
+        stage.close();
+
+    }
+
+
+    @FXML
+    protected void onCopyWebsiteButtonClick(ActionEvent event) {
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+
+        ClipboardContent content = new ClipboardContent();
+
+        content.putString(website.getText());
+        clipboard.setContent(content);
+
+    }
+
+    @FXML
+    protected void onCopyUsernameButtonClick(ActionEvent event) {
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+
+        ClipboardContent content = new ClipboardContent();
+
+        content.putString(username.getText());
+        clipboard.setContent(content);
+
+    }
+
+    @FXML
+    protected void onCopyPasswordButtonClick(ActionEvent event) {
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+
+        ClipboardContent content = new ClipboardContent();
+
+        content.putString(password.getText());
+        clipboard.setContent(content);
+
+    }
+
 
 
 
