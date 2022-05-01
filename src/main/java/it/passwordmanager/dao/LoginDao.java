@@ -73,7 +73,7 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public boolean update(Login login) {
+    public boolean update(Login oldLogin, Login newLogin) {
         return false;
     }
 
