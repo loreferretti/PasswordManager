@@ -181,6 +181,15 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
+    protected void onSearchButtonClick(ActionEvent event) {
+
+        String searchString = searchField.getText();
+
+        //TODO recall the loginController search method
+
+    }
+
 
 
 }
