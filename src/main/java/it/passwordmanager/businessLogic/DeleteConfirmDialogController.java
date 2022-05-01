@@ -31,6 +31,17 @@ public class DeleteConfirmDialogController {
 
     }
 
+    @FXML
+    protected void onYesButtonClick(ActionEvent event) {
 
+        loginController.deleteLogin(login);
+
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        stage.close();
+
+        showLoginController.closeStage();
+
+    }
 
 }
