@@ -220,6 +220,34 @@ public class MainWindowController implements Initializable {
 
     }
 
+    @FXML
+    protected void onAboutButtonClick(ActionEvent event) {
+
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("credits_dialog.fxml"));
+
+            Stage creditsStage = new Stage();
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            creditsStage.initModality(Modality.APPLICATION_MODAL);
+
+            creditsStage.setResizable(false);
+            creditsStage.setTitle("Credits");
+            creditsStage.setScene(scene);
+
+            creditsStage.show();
+            creditsStage.centerOnScreen();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
+    }
 
 }
 
