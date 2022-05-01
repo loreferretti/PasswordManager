@@ -22,6 +22,15 @@ public class DeleteConfirmDialogController {
 
     }
 
+    @FXML
+    protected void onNoButtonClick(ActionEvent event) {
+
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        stage.close();
+
+    }
+
 
 
 }
