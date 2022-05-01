@@ -11,6 +11,7 @@ public class LoginController {
 
     public LoginController() {}
 
+
     public boolean addLogin(Login login) {
         return proxy.create(login);
     }
