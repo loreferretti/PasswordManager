@@ -52,6 +52,14 @@ public class AddLoginController implements Initializable {
 
     }
 
+    protected void closeStage() {
+
+        Stage stage = (Stage) (website.getScene().getWindow());
+
+        stage.close();
+
+    }
+
 
 }
 
