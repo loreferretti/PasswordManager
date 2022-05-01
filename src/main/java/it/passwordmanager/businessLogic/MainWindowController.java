@@ -73,6 +73,35 @@ public class MainWindowController implements Initializable {
         //FIXME think about the utility of this method
     }
 
+    private void showLoginClick() {
+
+        try {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("show_login_window.fxml"));
+
+            Stage showStage = new Stage();
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            showStage.initModality(Modality.APPLICATION_MODAL);
+
+            //TODO
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+    }
+
+    @FXML
+    protected void handleShowLoginClick(ActionEvent event) {
+
+        showLoginClick();
+
+    }
+
 
 
 }
