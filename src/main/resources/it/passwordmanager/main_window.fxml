@@ -27,7 +27,7 @@
                             </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#onQUITButtonClick" text="Close">
+                        <MenuItem mnemonicParsing="false" onAction="#onQuitButtonClick" text="Close">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
@@ -36,7 +36,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#onABOUTButtonClick" text="About">
+                        <MenuItem mnemonicParsing="false" onAction="#onAboutButtonClick" text="About">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="H" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
