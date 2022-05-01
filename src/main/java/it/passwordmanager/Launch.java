@@ -57,8 +57,10 @@ public class Launch extends Application {
             primaryStage.centerOnScreen();
 
         } catch(IOException e) {
+
             e.printStackTrace();
             System.out.println(e.getMessage());
+
         }
 
     }
