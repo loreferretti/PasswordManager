@@ -104,6 +104,44 @@ public class ShowLoginController {
 
     }
 
+    @FXML
+    protected void onCloseButtonClick(ActionEvent event) {
+
+        closeStage();
+
+    }
+
+    @FXML
+    protected void onEditButtonClick(ActionEvent event) {
+
+        try {
+
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("edit_login_window.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            EditLoginController editLoginController = fxmlLoader.getController();
+
+            editLoginController.initialize(login);
+
+            stage.setTitle("Edit Login");
+            stage.setScene(scene);
+            stage.setResizable(false);
+
+            stage.show();
+            stage.centerOnScreen();
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+
+        }
+
+    }
+
 
 
 
