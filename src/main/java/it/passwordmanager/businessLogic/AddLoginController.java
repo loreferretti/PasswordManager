@@ -104,7 +104,16 @@ public class AddLoginController implements Initializable {
 
     }
 
+    @FXML
+    protected void onSaveButtonClick(ActionEvent event) {
 
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        stage.close();
+
+        loginController.addLogin(new Login(website.getText(), username.getText(), password.getText()));
+
+    }
 }
 
 
