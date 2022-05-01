@@ -10,7 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
             style="-fx-background-color: #E5E5E5;"
             xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.passwordmanager.businessLogic.EditLoginWindowController">
+            fx:controller="it.passwordmanager.businessLogic.EditLoginController">
     <children>
         <TextField fx:id="editWebsite" layoutX="200.0" layoutY="48.0" style="-fx-border-color: #b5b5b5; -fx-border-width: 2;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="48.0" />
         <TextField fx:id="editUsername" layoutX="200.0" layoutY="140.0" style="-fx-border-color: #b5b5b5; -fx-border-width: 2;" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="140.0" />
@@ -20,7 +20,7 @@
         <Label alignment="CENTER" layoutX="58.0" layoutY="124.0" prefHeight="24.0" prefWidth="100.0" style="-fx-font-weight: bold;" text="Username" textFill="#0093ff" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="142.0" />
         <Label alignment="CENTER" layoutX="60.0" layoutY="227.0" prefHeight="24.0" prefWidth="100.0" style="-fx-font-weight: bold;" text="Password" textFill="#0093ff" AnchorPane.leftAnchor="75.0" AnchorPane.topAnchor="234.0" />
         <CheckBox fx:id="showPassword" layoutX="507.0" layoutY="234.0" mnemonicParsing="false" prefHeight="24.0" text="Show" AnchorPane.rightAnchor="30.0" />
-        <Button alignment="CENTER" layoutX="130.0" layoutY="313.0" mnemonicParsing="false" onAction="#onBACKButtonClick" prefWidth="60.0" style="-fx-border-color: #c5c5c5; -fx-border-width: 2;" text="Back" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="326.0" />
+        <Button alignment="CENTER" layoutX="130.0" layoutY="313.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefWidth="60.0" style="-fx-border-color: #c5c5c5; -fx-border-width: 2;" text="Back" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="326.0" />
         <Button alignment="CENTER" layoutX="384.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefWidth="60.0" style="-fx-border-color: #c5c5c5; -fx-border-width: 2;" text="Save" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="326.0" />
     </children>
 </AnchorPane>
