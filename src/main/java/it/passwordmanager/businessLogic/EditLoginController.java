@@ -56,5 +56,14 @@ public class EditLoginController{
 
     }
 
+    @FXML
+    protected void closeStage() {
+
+        Stage stage = (Stage) (editWebsite.getScene().getWindow());
+
+        stage.close();
+
+    }
+
 
 }
