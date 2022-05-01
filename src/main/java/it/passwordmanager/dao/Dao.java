@@ -3,10 +3,10 @@ package it.passwordmanager.dao;
 import java.util.List;
 
 public interface Dao<T>{
-    public List<T> getAll();
-    public boolean create(T t);
-    public List<T> read(Object obj);
-    public boolean update(T t);
-    public boolean delete(T t);
+    List<T> getAll();
+    boolean create(T t);
+    List<T> read(Object obj);
+    boolean update(T oldT, T newT);
+    boolean delete(T t);
 
 }
