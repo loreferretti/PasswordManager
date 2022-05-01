@@ -9,18 +9,14 @@ public class LoginController {
 
     private Dao<Login> proxy;
 
-    public LoginController() {
-
-        proxy = new AuthenticationProxy();
-
-    }
+    public LoginController() {}
 
     public boolean addLogin(Login login) {
         return proxy.create(login);
     }
 
-    public boolean updateLogin(Login login) {
-        return proxy.update(login);
+    public boolean updateLogin(Login oldLogin, Login newLogin) {
+        return proxy.update(oldLogin, newLogin);
     }
 
     public boolean deleteLogin(Login login) {
@@ -40,6 +36,9 @@ public class LoginController {
     }
 
     public boolean authenticate(String password) {
+
+        proxy = new AuthenticationProxy(password);
+
         return false;
     }
 
