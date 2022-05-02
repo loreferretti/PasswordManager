@@ -4,6 +4,7 @@ import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -34,18 +35,18 @@ public class EncryptionService {
         }
     }
 
-    private String padding(String key) {
+    private byte[] padding(String key) {
         int charsToAdd = 16 - (key.length() % 16 );
         for(char c = 'a'; c < 'a'+ charsToAdd; c++) {
             key += c;
         }
-        return key;
+        return key.getBytes();
     }
 
 
     public String encrypt(String keyVal, String field) {
         try {
-            Key key = new SecretKeySpec(padding(keyVal).getBytes(), "AES");
+            Key key = new SecretKeySpec(padding(keyVal), "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] encField = cipher.doFinal(field.getBytes());
@@ -57,7 +58,7 @@ public class EncryptionService {
 
     public String decrypt(String keyVal, String field) {
         try {
-            Key key = new SecretKeySpec(padding(keyVal).getBytes(), "AES");
+            Key key = new SecretKeySpec(padding(keyVal), "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] decField = Base64.getDecoder().decode(field);
@@ -85,7 +86,7 @@ public class EncryptionService {
             try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
                 outputStream.write(outputBytes);
             }
-            
+
         } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
