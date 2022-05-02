@@ -1,12 +1,15 @@
 package it.passwordmanager.businessLogic;
 
-import javax.crypto.SecretKeyFactory;
+import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.*;
+import java.security.InvalidKeyException;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
-import java.util.Arrays;
 
 public class EncryptionService {
     public byte[] getEncryptedPassword(String password, byte[] salt) {
@@ -35,7 +38,31 @@ public class EncryptionService {
         }
     }
 
-    public void DbEncryption(int cipherMode) {
+    public void DbEncryption(int cipherMode, String password, File inputFile, File outputFile) {
+
+        try {
+            Key key = new SecretKeySpec(password.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(cipherMode, key);
+
+
+            byte[] inputBytes;
+            try (FileInputStream inputStream = new FileInputStream(inputFile)) {
+                inputBytes = new byte[(int) inputFile.length()];
+                inputStream.read(inputBytes);
+            }
+
+            byte[] outputBytes = cipher.doFinal(inputBytes);
+            try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
+                outputStream.write(outputBytes);
+            }
+
+
+
+        } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IOException |
+                 BadPaddingException | IllegalBlockSizeException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
