@@ -15,7 +15,7 @@ public class LoginDao implements Dao<Login> {
     @Override
     public List<Login> getAll() {
         Connection connection = ConnectionFactory.getConnection();
-        String query = "select * from Login;";
+        String query = "select website, username, password from Login;";
         try {
             PreparedStatement pstat = connection.prepareStatement(query);
             ResultSet rs = pstat.executeQuery();
@@ -54,7 +54,7 @@ public class LoginDao implements Dao<Login> {
     @Override
     public List<Login> read(Object obj) {
         Connection connection = ConnectionFactory.getConnection();
-        String query = "select * from Login where website = ?";
+        String query = "select website, username, password from Login where website = ?;";
 
         try {
             PreparedStatement pstat = connection.prepareStatement(query);
@@ -73,19 +73,17 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public boolean update(Login oldLogin, Login newLogin) {
+    public boolean update(Login login) {
         Connection connection = ConnectionFactory.getConnection();
-        String query = "update Login set website = ?, username = ?, password = ? where website = ? and username = ? and password = ?;";
+        String query = "update Login set website = ?, username = ?, password = ? where id = ?;";
         boolean valid = false;
         try {
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, newLogin.getWebsite());
-            pstat.setString(2, newLogin.getUsername());
-            pstat.setString(3, newLogin.getPassword());
+            pstat.setString(1, login.getWebsite());
+            pstat.setString(2, login.getUsername());
+            pstat.setString(3, login.getPassword());
 
-            pstat.setString(4, oldLogin.getWebsite());
-            pstat.setString(5, oldLogin.getUsername());
-            pstat.setString(6, oldLogin.getPassword());
+            pstat.setString(4, Integer.toString(login.getId()));
 
             valid = pstat.execute();
         } catch (SQLException e) {
@@ -98,13 +96,11 @@ public class LoginDao implements Dao<Login> {
     @Override
     public boolean delete(Login login) {
         Connection connection = ConnectionFactory.getConnection();
-        String query = "delete from Login where website = ?, username = ?, password = ?;";
+        String query = "delete from Login where id = ?;";
         boolean valid = false;
         try {
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, login.getWebsite());
-            pstat.setString(2,login.getUsername());
-            pstat.setString(3, login.getPassword());
+            pstat.setString(1, Integer.toString(login.getId()));
             valid = pstat.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package it.passwordmanager.domainModel;
 
 public class Login {
+    private int id;
     private String website;
     private String username;
     private String password;
@@ -9,6 +10,9 @@ public class Login {
         this.website = website;
         this.username = username;
         this.password = password;
+    }
+    public int getId() {
+        return this.id;
     }
 
     public String getWebsite() {

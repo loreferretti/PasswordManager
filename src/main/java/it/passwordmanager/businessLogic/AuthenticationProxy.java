@@ -45,10 +45,10 @@ public class AuthenticationProxy implements Dao<Login> {
     }
 
     @Override
-    public boolean update(Login oldLogin, Login newLogin) {
+    public boolean update(Login login) {
         initDao();
 
-        return loginDao.update(oldLogin, newLogin);
+        return loginDao.update(login);
     }
 
     @Override

@@ -19,8 +19,8 @@ public class LoginController {
         return proxy.create(login);
     }
 
-    public boolean updateLogin(Login oldLogin, Login newLogin) {
-        return proxy.update(oldLogin, newLogin);
+    public boolean updateLogin(Login login) {
+        return proxy.update(login);
     }
 
     public boolean deleteLogin(Login login) {

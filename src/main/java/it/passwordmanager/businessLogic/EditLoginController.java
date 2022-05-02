@@ -118,11 +118,11 @@ public class EditLoginController{
         if (!editWebsite.getText().equals(login.getWebsite()) || !editWebsite.getText().equals(login.getUsername())
                 || !editPassword.getText().equals(login.getPassword())) {
 
-            Login newLogin = new Login(editWebsite.getText(), editUsername.getText(), editPassword.getText());
+            login.setWebsite(editWebsite.getText());
+            login.setUsername(editUsername.getText());
+            login.setPassword(editPassword.getText());
 
-            loginController.updateLogin(login, newLogin);
-
-            login = newLogin;
+            loginController.updateLogin(login);
 
             parentController.getAll();
         }
