@@ -44,8 +44,7 @@ public class EncryptionService {
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(cipherMode, key);
 
-            byte[] fieldEncrypted = cipher.doFinal(field.getBytes());
-            return fieldEncrypted.toString();
+            return cipher.doFinal(field.getBytes()).toString();
 
         } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException |
                  IllegalBlockSizeException e) {
