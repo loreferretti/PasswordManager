@@ -2,6 +2,7 @@ package it.passwordmanager.businessLogic;
 
 import it.passwordmanager.Launch;
 import it.passwordmanager.domainModel.Login;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +28,8 @@ public class MainWindowController implements Initializable {
 
     private LoginController loginController;
 
+    private ObservableList<Login> list = FXCollections.observableArrayList();
+
     @FXML
     private TableView<Login> loginTable = new TableView<>();
     @FXML
@@ -48,6 +51,15 @@ public class MainWindowController implements Initializable {
         website.setCellValueFactory(new PropertyValueFactory<>("website"));
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+        for (int i = 0; i <= 25; i++) {
+            String site = "website" + i;
+            String user = "username" + i;
+            String pass = "password" + i;
+            list.add(new Login(site, user, pass));
+        }
+
+        loginTable.setItems(list);
 
         //TODO here get All the login from the database via the LoginController and set the table with .setItems()
 
