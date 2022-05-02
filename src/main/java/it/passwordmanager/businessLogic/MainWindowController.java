@@ -22,13 +22,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
 
     private LoginController loginController;
 
-    private ObservableList<Login> list = FXCollections.observableArrayList();
+    private ObservableList<Login> tableViewlist;
 
     @FXML
     private TableView<Login> loginTable = new TableView<>();
@@ -52,16 +53,9 @@ public class MainWindowController implements Initializable {
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
 
-        for (int i = 0; i <= 25; i++) {
-            String site = "website" + i;
-            String user = "username" + i;
-            String pass = "password" + i;
-            list.add(new Login(site, user, pass));
-        }
 
-        loginTable.setItems(list);
+//        getAll();
 
-        //TODO here get All the login from the database via the LoginController and set the table with .setItems()
 
         loginTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 2) {
@@ -79,10 +73,20 @@ public class MainWindowController implements Initializable {
 
 
 
-    private void refreshTable(ObservableList<Login> refreshList) {
+    protected void getAll() {
 
-        loginTable.setItems(refreshList);
-        //FIXME think about the utility of this method
+        List<Login> arrayList = loginController.getAll();
+
+        setTableViewContent(arrayList);
+
+    }
+
+    protected void setTableViewContent(List<Login> list) {
+
+        tableViewlist = FXCollections.observableArrayList(list);
+
+        loginTable.setItems(tableViewlist);
+
     }
 
     private void showLoginClick() {
@@ -100,7 +104,7 @@ public class MainWindowController implements Initializable {
 
             ShowLoginController showLoginController = fxmlLoader.getController();
 
-            showLoginController.initialize(login);
+            showLoginController.initialize(this, login);
 
             showStage.setTitle("Show Login");
             showStage.setScene(scene);
@@ -140,7 +144,7 @@ public class MainWindowController implements Initializable {
 
             EditLoginController editLoginController = fxmlLoader.getController();
 
-            editLoginController.initialize(login);
+            editLoginController.initialize(this, login);
 
             editStage.setTitle("Edit login");
             editStage.setScene(scene);
@@ -163,12 +167,8 @@ public class MainWindowController implements Initializable {
 
         Login login = loginTable.getSelectionModel().getSelectedItem();
 
-        if(loginController.deleteLogin(login));
-            //refreshTable
-
-        //refreshTable
-
-        //FIXME think about how to do the refresh of the list, whether do it in loginDao model or similar or do it here
+        if(loginController.deleteLogin(login))
+            getAll();
 
     }
 
@@ -236,6 +236,10 @@ public class MainWindowController implements Initializable {
             addStage.initModality(Modality.APPLICATION_MODAL);
 
             Scene scene = new Scene(fxmlLoader.load());
+
+            AddLoginController addLoginController = fxmlLoader.getController();
+
+            addLoginController.initialize(this);
 
             addStage.setTitle("Add login");
             addStage.setScene(scene);
