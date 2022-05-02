@@ -167,8 +167,9 @@ public class MainWindowController implements Initializable {
 
         Login login = loginTable.getSelectionModel().getSelectedItem();
 
-        if(loginController.deleteLogin(login))
-            getAll();
+        loginController.deleteLogin(login);
+
+        getAll();
 
     }
 
