@@ -45,6 +45,19 @@ public class EncryptionService {
         return key;
     }
 
+
+    public String encrypt(String keyVal, String field) {
+        try {
+            Key key = new SecretKeySpec(padding(keyVal).getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] encField = cipher.doFinal(field.getBytes());
+            return Base64.getEncoder().encodeToString(encField);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void DbEncryption(int cipherMode, String password, File inputFile, File outputFile) {
 
         try {
