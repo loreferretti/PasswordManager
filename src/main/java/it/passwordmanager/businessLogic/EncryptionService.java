@@ -35,7 +35,7 @@ public class EncryptionService {
         }
     }
 
-    private byte[] padding(String key) {
+    public byte[] padding(String key) {
         int charsToAdd = 16 - (key.length() % 16 );
         for(char c = 'a'; c < 'a'+ charsToAdd; c++) {
             key += c;
@@ -68,10 +68,10 @@ public class EncryptionService {
         }
     }
 
-    public void DbEncryption(int cipherMode, String password, File inputFile, File outputFile) {
+    public void DbEncryption(int cipherMode, String keyVal, File inputFile, File outputFile) {
 
         try {
-            Key key = new SecretKeySpec(password.getBytes(), "AES");
+            Key key = new SecretKeySpec(padding(keyVal), "AES");
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(cipherMode, key);
 
