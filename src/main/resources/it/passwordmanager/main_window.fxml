@@ -76,7 +76,12 @@
                         </MenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#handleCopyUsernameClick" text="Copy Username">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="U" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="G" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#handleCopyWebsiteClick" text="Copy Website">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
