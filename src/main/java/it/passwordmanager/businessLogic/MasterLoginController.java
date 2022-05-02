@@ -37,6 +37,9 @@ public class MasterLoginController implements Initializable {
 
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
+            stage.setWidth(960);
+            stage.setHeight(540);
+
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("main_window.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
