@@ -4,7 +4,6 @@ import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -53,6 +52,18 @@ public class EncryptionService {
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] encField = cipher.doFinal(field.getBytes());
             return Base64.getEncoder().encodeToString(encField);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String decrypt(String keyVal, String field) {
+        try {
+            Key key = new SecretKeySpec(padding(keyVal).getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] decField = Base64.getDecoder().decode(field);
+            return new String(cipher.doFinal(decField));
         } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
