@@ -18,9 +18,7 @@ public class EncryptionService {
             KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, iterations, derivedKeyLength);
             SecretKeyFactory f =  SecretKeyFactory.getInstance(algorithm);
             return f.generateSecret(spec).getEncoded();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidKeySpecException e) {
+        } catch (GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
     }
@@ -87,11 +85,8 @@ public class EncryptionService {
             try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
                 outputStream.write(outputBytes);
             }
-
-
-
-        } catch (NoSuchAlgorithmException | InvalidKeyException | NoSuchPaddingException | IOException |
-                 BadPaddingException | IllegalBlockSizeException e) {
+            
+        } catch (GeneralSecurityException | IOException e) {
             throw new RuntimeException(e);
         }
 
