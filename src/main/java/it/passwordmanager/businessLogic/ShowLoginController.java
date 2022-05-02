@@ -20,6 +20,7 @@ public class ShowLoginController {
 
     private Login login;
     private LoginController loginController;
+    private MainWindowController parentController;
 
     @FXML
     private TextField website;
@@ -33,8 +34,9 @@ public class ShowLoginController {
     private CheckBox showPassword;
 
 
-    public void initialize(Login login) {
+    public void initialize(MainWindowController parentController, Login login) {
 
+        this.parentController = parentController;
         this.loginController = new LoginController();
         this.login = login;
 
@@ -124,7 +126,7 @@ public class ShowLoginController {
 
             EditLoginController editLoginController = fxmlLoader.getController();
 
-            editLoginController.initialize(login);
+            editLoginController.initialize(parentController, login);
 
             stage.setTitle("Edit Login");
             stage.setScene(scene);
@@ -155,7 +157,7 @@ public class ShowLoginController {
 
             DeleteConfirmDialogController deleteConfirmDialogController = fxmlLoader.getController();
 
-            deleteConfirmDialogController.initialize(this, login);
+            deleteConfirmDialogController.initialize(this, parentController, login);
 
             deleteConfirmStage.setTitle("Delete Confirmation");
             deleteConfirmStage.setScene(scene);
