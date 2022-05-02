@@ -37,6 +37,14 @@ public class EncryptionService {
         }
     }
 
+    private String padding(String key) {
+        int charsToAdd = 16 - (key.length() % 16 );
+        for(char c = 'a'; c < 'a'+ charsToAdd; c++) {
+            key += c;
+        }
+        return key;
+    }
+
     public void DbEncryption(int cipherMode, String password, File inputFile, File outputFile) {
 
         try {
