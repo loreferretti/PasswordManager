@@ -8,14 +8,7 @@ import java.util.List;
 
 public class AuthenticationProxy implements Dao<Login> {
     private LoginDao loginDao;
-    private String password;
     private IdentityManager identityManager;
-
-    public AuthenticationProxy(String password) {
-
-        this.password = password;
-
-    }
 
     private void initDao() {
 
@@ -58,7 +51,7 @@ public class AuthenticationProxy implements Dao<Login> {
         return loginDao.delete(login);
     }
 
-    public boolean authenticate() {
+    public boolean authenticate(String password) {
 
         identityManager = new IdentityManager();
 

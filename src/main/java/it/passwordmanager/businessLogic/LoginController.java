@@ -10,8 +10,17 @@ import java.util.List;
 public class LoginController {
 
     private Dao<Login> proxy;
+    private String password;
 
     public LoginController() {}
+
+    public LoginController(String password) {
+        this.password = password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public List<Login> getAll() {
         return proxy.getAll();
@@ -37,35 +46,35 @@ public class LoginController {
         return false;
     }
 
-    public void onStart(String masterPassword) {
+    public void onStart() {
         try {
             File db = new File("db-login-encrypted.db");
             File db_temp = File.createTempFile("db-login",".db");
             db_temp.deleteOnExit();
 
             EncryptionService es = new EncryptionService();
-            es.DbEncryption(2, es.padding(masterPassword).toString(), db, db_temp);
+            es.DbEncryption(2, es.padding(password).toString(), db, db_temp);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void onExit(String masterPassword) {
+    public void onExit() {
         File db = new File("db-login-encrypted.db");
         File db_temp = new File("db-login.db");
 
         EncryptionService es = new EncryptionService();
-        es.DbEncryption(1, es.padding(masterPassword).toString(), db_temp, db);
+        es.DbEncryption(1, es.padding(password).toString(), db_temp, db);
     }
 
     public boolean storeAndEncryptPassword(String password) {
         return false;
     }
 
-    public boolean authenticate(String password) {
+    public boolean authenticate() {
 
-        proxy = new AuthenticationProxy(password);
+        proxy = new AuthenticationProxy();
 
         return false;
     }

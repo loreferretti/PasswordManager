@@ -33,9 +33,11 @@ public class MasterLoginController implements Initializable {
 
         String masterPassword = password.getText();
 
-        if(loginController.authenticate(masterPassword)) {
+        loginController.setPassword(masterPassword);
 
-            loginController.onStart(masterPassword);
+        if(loginController.authenticate()) {
+
+            loginController.onStart();
 
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
