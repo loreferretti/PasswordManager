@@ -80,12 +80,22 @@ public class MainWindowController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("show_login_window.fxml"));
 
             Stage showStage = new Stage();
+            showStage.initModality(Modality.APPLICATION_MODAL);
 
             Scene scene = new Scene(fxmlLoader.load());
 
-            showStage.initModality(Modality.APPLICATION_MODAL);
+            Login login = loginTable.getSelectionModel().getSelectedItem();
 
-            //TODO
+            ShowLoginController showLoginController = fxmlLoader.getController();
+
+            showLoginController.initialize(login);
+
+            showStage.setTitle("Show Login");
+            showStage.setScene(scene);
+            showStage.setResizable(false);
+
+            showStage.show();
+            showStage.centerOnScreen();
 
         } catch (IOException e) {
 
@@ -110,10 +120,9 @@ public class MainWindowController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("edit_login_window.fxml"));
 
             Stage editStage = new Stage();
+            editStage.initModality(Modality.APPLICATION_MODAL);
 
             Scene scene = new Scene(fxmlLoader.load());
-
-            editStage.initModality(Modality.APPLICATION_MODAL);
 
 
 
@@ -131,7 +140,8 @@ public class MainWindowController implements Initializable {
 
         Login login = loginTable.getSelectionModel().getSelectedItem();
 
-        loginController.deleteLogin(login);
+        if(loginController.deleteLogin(login));
+            //refreshTable
 
         //refreshTable
 
@@ -185,6 +195,8 @@ public class MainWindowController implements Initializable {
     protected void onSearchButtonClick(ActionEvent event) {
 
         String searchString = searchField.getText();
+
+        //loginController.searchByWebsite(searchString); we take the result of this read and we set the items of the table
 
         //TODO recall the loginController search method
 
