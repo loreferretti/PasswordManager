@@ -44,11 +44,19 @@ public class LoginController {
             db_temp.deleteOnExit();
 
             EncryptionService es = new EncryptionService();
-            es.DbEncryption(2, es.padding(masterPassword).toString() , db, db_temp);
+            es.DbEncryption(2, es.padding(masterPassword).toString(), db, db_temp);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void onExit(String masterPassword) {
+        File db = new File("db-login-encrypted.db");
+        File db_temp = new File("db-login.db");
+
+        EncryptionService es = new EncryptionService();
+        es.DbEncryption(1, es.padding(masterPassword).toString(), db_temp, db);
     }
 
     public boolean storeAndEncryptPassword(String password) {
