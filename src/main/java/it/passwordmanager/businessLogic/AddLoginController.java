@@ -16,11 +16,14 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddLoginController implements Initializable {
+public class AddLoginController {
 
     private LoginController loginController;
+    private MainWindowController parentController;
 
     @FXML
     private TextField website;
@@ -33,10 +36,12 @@ public class AddLoginController implements Initializable {
     @FXML
     private CheckBox showPassword;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    public void initialize(MainWindowController parentController) {
 
         loginController = new LoginController();
+
+        this.parentController = parentController;
 
 
         password.setManaged(false);
@@ -112,6 +117,8 @@ public class AddLoginController implements Initializable {
         stage.close();
 
         loginController.addLogin(new Login(website.getText(), username.getText(), password.getText()));
+
+        parentController.getAll();
 
     }
 }
