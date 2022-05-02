@@ -73,9 +73,9 @@ public class AddLoginController implements Initializable {
 
                 Scene scene = new Scene(fxmlLoader.load());
 
-                BackWithoutSaveConfirmDialogController backWithoutSaveConfirmDialogController = fxmlLoader.getController();
+                BackWithoutSaveOnAddConfirmDialogController backWithoutSaveOnAddConfirmDialogController = fxmlLoader.getController();
 
-                backWithoutSaveConfirmDialogController.initialize(this);
+                backWithoutSaveOnAddConfirmDialogController.initialize(this);
 
                 dontSaveConfirmDialogStage.setScene(scene);
 
