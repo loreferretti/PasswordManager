@@ -73,15 +73,15 @@ public class EditLoginController{
             if(!editWebsite.getText().equals(login.getWebsite()) || !editWebsite.getText().equals(login.getUsername())
                     || !editPassword.getText().equals(login.getPassword())) {
 
-                FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("back_without_save_confirm_dialog.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("back_without_save_confirm_dialog_on_edit.fxml"));
 
                 Stage dontSaveConfirmDialogStage = new Stage();
 
                 Scene scene = new Scene(fxmlLoader.load());
 
-                BackWithoutSaveConfirmDialogController backWithoutSaveConfirmDialogController = fxmlLoader.getController();
+                BackWithoutSaveOnEditConfirmDialogController backWithoutSaveOnEditConfirmDialogController = fxmlLoader.getController();
 
-                backWithoutSaveConfirmDialogController.initialize(this);
+                backWithoutSaveOnEditConfirmDialogController.initialize(this);
 
                 dontSaveConfirmDialogStage.setScene(scene);
 
