@@ -124,7 +124,18 @@ public class MainWindowController implements Initializable {
 
             Scene scene = new Scene(fxmlLoader.load());
 
+            Login login = loginTable.getSelectionModel().getSelectedItem();
 
+            EditLoginController editLoginController = fxmlLoader.getController();
+
+            editLoginController.initialize(login);
+
+            editStage.setTitle("Edit login");
+            editStage.setScene(scene);
+            editStage.setResizable(false);
+
+            editStage.show();
+            editStage.centerOnScreen();
 
         } catch (IOException e) {
 
