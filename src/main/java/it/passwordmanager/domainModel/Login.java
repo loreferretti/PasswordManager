@@ -11,6 +11,19 @@ public class Login {
         this.username = username;
         this.password = password;
     }
+
+    public Login(int id, String website, String username, String password) {
+        this.id = id;
+        this.website = website;
+        this.username = username;
+        this.password = password;
+    }
+
+
+    /*public void setId(int id) {
+        this.id = id;
+    }*/
+
     public int getId() {
         return this.id;
     }
