@@ -17,31 +17,31 @@ public class AuthenticationProxy implements Dao<Login> {
     }
 
     @Override
-    public List<Login> getAll() {
+    public List<Login> getAll(String password) {
         initDao();
 
-        return loginDao.getAll();
+        return loginDao.getAll(password);
     }
 
     @Override
-    public boolean create(Login login) {
+    public boolean create(String password, Login login) {
         initDao();
 
-        return loginDao.create(login);
+        return loginDao.create(password, login);
     }
 
     @Override
-    public List<Login> read(Object obj) {
+    public List<Login> read(String password, Object obj) {
         initDao();
 
-        return loginDao.read(obj);
+        return loginDao.read(password, obj);
     }
 
     @Override
-    public boolean update(Login login) {
+    public boolean update(String password, Login login) {
         initDao();
 
-        return loginDao.update(login);
+        return loginDao.update(password, login);
     }
 
     @Override

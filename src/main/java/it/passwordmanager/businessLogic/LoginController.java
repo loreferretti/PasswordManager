@@ -23,23 +23,23 @@ public class LoginController {
     }
 
     public List<Login> getAll() {
-        return proxy.getAll();
+        return proxy.getAll(password);
     }
 
     public boolean addLogin(Login login) {
-        return proxy.create(login);
+        return proxy.create(password, login);
     }
 
     public boolean updateLogin(Login login) {
-        return proxy.update(login);
+        return proxy.update(password, login);
     }
 
     public boolean deleteLogin(Login login) {
         return proxy.delete(login);
     }
 
-    public List<Login> searchByWebsite(String website) {
-        return proxy.read(website);
+    public List<Login> searchByWebsite(String searchString) {
+        return proxy.read(password, searchString);
     }
 
     public boolean encrypt(int cipherMode) {

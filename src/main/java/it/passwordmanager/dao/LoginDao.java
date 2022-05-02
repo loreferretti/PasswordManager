@@ -1,6 +1,7 @@
 package it.passwordmanager.dao;
 
 import it.passwordmanager.businessLogic.ConnectionFactory;
+import it.passwordmanager.businessLogic.EncryptionService;
 import it.passwordmanager.domainModel.Login;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.util.List;
 public class LoginDao implements Dao<Login> {
 
     @Override
-    public List<Login> getAll() {
+    public List<Login> getAll(String password) {
         Connection connection = ConnectionFactory.getConnection();
         String query = "select website, username, password from Login;";
         try {
@@ -22,7 +23,7 @@ public class LoginDao implements Dao<Login> {
 
             ArrayList<Login>  logins = new ArrayList<>();
             while(rs.next()) {
-                Login login = extractLogin(rs);
+                Login login = extractLogin(password, rs);
                 logins.add(login);
             }
             return logins;
@@ -35,15 +36,16 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public boolean create(Login login) {
+    public boolean create(String password, Login login) {
         Connection connection = ConnectionFactory.getConnection();
         String query = "insert into Login (website, username, password) values (?, ?, ?);";
         boolean valid = false;
         try {
+            EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, login.getWebsite());
-            pstat.setString(2, login.getUsername());
-            pstat.setString(3, login.getPassword());
+            pstat.setString(1, es.encrypt(es.padding(password).toString(),login.getWebsite()));
+            pstat.setString(2, es.encrypt(es.padding(password).toString(),login.getUsername()));
+            pstat.setString(3, es.encrypt(es.padding(password).toString(),login.getPassword()));
             valid = pstat.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -52,18 +54,19 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public List<Login> read(Object obj) {
+    public List<Login> read(String password, Object obj) {
         Connection connection = ConnectionFactory.getConnection();
         String query = "select website, username, password from Login where website like ?%;";
 
         try {
+            EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, String.valueOf(obj));
+            pstat.setString(1, es.encrypt(es.padding(password).toString(), String.valueOf(obj)));
 
             ResultSet rs = pstat.executeQuery();
             ArrayList<Login>  logins = new ArrayList<>();
             while(rs.next()) {
-                Login login = extractLogin(rs);
+                Login login = extractLogin(password, rs);
                 logins.add(login);
             }
             return logins;
@@ -73,15 +76,16 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public boolean update(Login login) {
+    public boolean update(String password, Login login) {
         Connection connection = ConnectionFactory.getConnection();
         String query = "update Login set website = ?, username = ?, password = ? where id = ?;";
         boolean valid = false;
         try {
+            EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, login.getWebsite());
-            pstat.setString(2, login.getUsername());
-            pstat.setString(3, login.getPassword());
+            pstat.setString(1, es.encrypt(es.padding(password).toString(),login.getWebsite()));
+            pstat.setString(2, es.encrypt(es.padding(password).toString(),login.getUsername()));
+            pstat.setString(3, es.encrypt(es.padding(password).toString(),login.getPassword()));
 
             pstat.setString(4, Integer.toString(login.getId()));
 
@@ -110,10 +114,11 @@ public class LoginDao implements Dao<Login> {
 
     }
 
-    private Login extractLogin(ResultSet rs) throws SQLException {
-        String website = rs.getString("website");
-        String username = rs.getString("username");
-        String password = rs.getString("password");
+    private Login extractLogin(String pass, ResultSet rs) throws SQLException {
+        EncryptionService es = new EncryptionService();
+        String website = es.decrypt(es.padding(pass).toString(),rs.getString("website"));
+        String username = es.decrypt(es.padding(pass).toString(), rs.getString("username"));
+        String password = es.decrypt(es.padding(pass).toString(), rs.getString("password"));
 
         Login login = new Login(website, username, password);
         return login;
