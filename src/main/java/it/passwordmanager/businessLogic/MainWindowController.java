@@ -198,12 +198,17 @@ public class MainWindowController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("add_login_window.fxml"));
 
             Stage addStage = new Stage();
+            addStage.initModality(Modality.APPLICATION_MODAL);
 
             Scene scene = new Scene(fxmlLoader.load());
 
-            addStage.initModality(Modality.APPLICATION_MODAL);
+            addStage.setTitle("Add login");
+            addStage.setScene(scene);
+            addStage.setResizable(false);
 
-            //TODO
+            addStage.show();
+            addStage.centerOnScreen();
+
 
         } catch (IOException e) {
 
