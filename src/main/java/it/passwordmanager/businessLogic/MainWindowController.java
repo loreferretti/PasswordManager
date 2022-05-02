@@ -260,8 +260,6 @@ public class MainWindowController implements Initializable {
     @FXML
     protected void onQuitButtonClick(ActionEvent event) {
 
-        loginController.onExit();
-
         javafx.application.Platform.exit();
 
     }

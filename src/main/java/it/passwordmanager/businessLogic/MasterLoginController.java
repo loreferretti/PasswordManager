@@ -37,8 +37,6 @@ public class MasterLoginController implements Initializable {
 
         if(loginController.authenticate()) {
 
-            loginController.onStart();
-
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
             stage.setWidth(960);
