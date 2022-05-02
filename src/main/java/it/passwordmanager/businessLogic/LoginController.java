@@ -11,6 +11,9 @@ public class LoginController {
 
     public LoginController() {}
 
+    public List<Login> getAll() {
+        return proxy.getAll();
+    }
 
     public boolean addLogin(Login login) {
         return proxy.create(login);
