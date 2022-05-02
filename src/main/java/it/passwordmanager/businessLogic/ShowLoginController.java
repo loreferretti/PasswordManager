@@ -37,7 +37,7 @@ public class ShowLoginController {
     public void initialize(MainWindowController parentController, Login login) {
 
         this.parentController = parentController;
-        this.loginController = new LoginController();
+        this.loginController = LoginController.getInstance();
         this.login = login;
 
 

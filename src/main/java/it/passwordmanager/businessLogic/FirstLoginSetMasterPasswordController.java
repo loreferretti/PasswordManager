@@ -33,7 +33,7 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resource) {
 
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
 
     }
 
@@ -42,7 +42,9 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
 
         if(password.getText().equals(reinsertedPassword.getText())) { //check also the length of the password
 
-            loginController.storeAndEncryptPassword(reinsertedPassword.getText());
+            loginController.setPassword(password.getText());
+
+//            loginController.storeAndEncryptPassword(reinsertedPassword.getText());
 
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 

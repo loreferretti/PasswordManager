@@ -39,7 +39,7 @@ public class AddLoginController {
 
     public void initialize(MainWindowController parentController) {
 
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
 
         this.parentController = parentController;
 

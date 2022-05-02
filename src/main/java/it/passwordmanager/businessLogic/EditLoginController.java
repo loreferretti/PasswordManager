@@ -35,7 +35,7 @@ public class EditLoginController{
     public void initialize(MainWindowController parentController, Login login) {
 
         this.parentController = parentController;
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
         this.login = login;
 
 

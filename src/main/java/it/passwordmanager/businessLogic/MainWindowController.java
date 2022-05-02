@@ -44,7 +44,7 @@ public class MainWindowController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resource) {
 
-        loginController = new LoginController();
+        loginController =   LoginController.getInstance();
 
 
         loginTable.setPlaceholder(new Label("The table is empty"));

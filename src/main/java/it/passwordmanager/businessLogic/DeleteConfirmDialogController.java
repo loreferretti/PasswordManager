@@ -18,7 +18,7 @@ public class DeleteConfirmDialogController {
 
         this.login = login;
 
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
 
         this.parentController = parentController;
 

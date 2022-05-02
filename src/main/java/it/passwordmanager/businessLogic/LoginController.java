@@ -3,18 +3,29 @@ package it.passwordmanager.businessLogic;
 import it.passwordmanager.dao.Dao;
 import it.passwordmanager.domainModel.Login;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class LoginController {
 
+    private static LoginController controller;
+
     private Dao<Login> proxy;
     private String password;
 
-    public LoginController() {}
+    public static LoginController getInstance() {
+        if (controller == null)
+            controller = new LoginController();
 
-    public LoginController(String password) {
+        return controller;
+    }
+
+    private LoginController() {
+        this.proxy = new AuthenticationProxy();
+    }
+
+    private LoginController(String password) {
+        this.proxy = new AuthenticationProxy();
         this.password = password;
     }
 
@@ -26,46 +37,20 @@ public class LoginController {
         return proxy.getAll(password);
     }
 
-    public boolean addLogin(Login login) {
-        return proxy.create(password, login);
+    public void addLogin(Login login) {
+        proxy.create(password, login);
     }
 
-    public boolean updateLogin(Login login) {
-        return proxy.update(password, login);
+    public void updateLogin(Login login) {
+        proxy.update(password, login);
     }
 
-    public boolean deleteLogin(Login login) {
-        return proxy.delete(login);
+    public void deleteLogin(Login login) {
+        proxy.delete(login);
     }
 
     public List<Login> searchByWebsite(String searchString) {
         return proxy.read(password, searchString);
-    }
-
-    public boolean encrypt(int cipherMode) {
-        return false;
-    }
-
-    public void onStart() {
-        try {
-            File db = new File("db-login-encrypted.db");
-            File db_temp = File.createTempFile("db-login",".db");
-            db_temp.deleteOnExit();
-
-            EncryptionService es = new EncryptionService();
-            es.DbEncryption(2, es.padding(password).toString(), db, db_temp);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void onExit() {
-        File db = new File("db-login-encrypted.db");
-        File db_temp = new File("db-login.db");
-
-        EncryptionService es = new EncryptionService();
-        es.DbEncryption(1, es.padding(password).toString(), db_temp, db);
     }
 
     public boolean storeAndEncryptPassword(String password) {

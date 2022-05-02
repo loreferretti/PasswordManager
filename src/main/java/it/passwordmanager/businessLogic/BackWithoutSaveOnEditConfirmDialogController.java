@@ -13,7 +13,7 @@ public class BackWithoutSaveOnEditConfirmDialogController {
 
     public void initialize(EditLoginController parentController) {
 
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
 
         this.editLoginControllerParent = parentController;
 

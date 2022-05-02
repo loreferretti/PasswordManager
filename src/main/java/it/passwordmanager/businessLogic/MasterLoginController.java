@@ -24,7 +24,7 @@ public class MasterLoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
 
     }
 

@@ -13,7 +13,7 @@ public class BackWithoutSaveOnAddConfirmDialogController {
 
     public void initialize(AddLoginController parentController) {
 
-        loginController = new LoginController();
+        loginController = LoginController.getInstance();
 
         this.addLoginControllerParent = parentController;
 
