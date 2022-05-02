@@ -1,6 +1,9 @@
 package it.passwordmanager.businessLogic;
 
 import it.passwordmanager.Launch;
+import it.passwordmanager.domainModel.Login;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -37,11 +40,14 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
     @FXML
     protected void onEnterButtonClick(ActionEvent event) throws IOException {
 
-        if(password.getText().equals(reinsertedPassword.getText())) {
+        if(password.getText().equals(reinsertedPassword.getText())) { //check also the length of the password
 
             loginController.storeAndEncryptPassword(reinsertedPassword.getText());
 
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+            stage.setWidth(960);
+            stage.setHeight(540);
 
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("main_window.fxml"));
 
