@@ -20,7 +20,7 @@ public class LoginDao implements Dao<Login> {
             PreparedStatement pstat = connection.prepareStatement(query);
             ResultSet rs = pstat.executeQuery();
 
-            ArrayList<Login>  logins = new ArrayList<Login>();
+            ArrayList<Login>  logins = new ArrayList<>();
             while(rs.next()) {
                 Login login = extractLogin(rs);
                 logins.add(login);
@@ -61,7 +61,7 @@ public class LoginDao implements Dao<Login> {
             pstat.setString(1, String.valueOf(obj));
 
             ResultSet rs = pstat.executeQuery();
-            ArrayList<Login>  logins = new ArrayList<Login>();
+            ArrayList<Login>  logins = new ArrayList<>();
             while(rs.next()) {
                 Login login = extractLogin(rs);
                 logins.add(login);
