@@ -9,16 +9,20 @@ import javafx.stage.Stage;
 public class DeleteConfirmDialogController {
 
     private LoginController loginController;
+    private MainWindowController parentController;
     private Login login;
 
     private ShowLoginController showLoginController;
 
-    public void initialize(ShowLoginController parentController, Login login) {
+    public void initialize(ShowLoginController showLoginController, MainWindowController parentController, Login login) {
+
         this.login = login;
 
         loginController = new LoginController();
 
-        this.showLoginController = parentController;
+        this.parentController = parentController;
+
+        this.showLoginController = showLoginController;
 
     }
 
@@ -36,11 +40,15 @@ public class DeleteConfirmDialogController {
 
         loginController.deleteLogin(login);
 
+        parentController.getAll();
+
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
         stage.close();
 
         showLoginController.closeStage();
+
+
 
     }
 
