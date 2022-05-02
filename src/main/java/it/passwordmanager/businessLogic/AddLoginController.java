@@ -46,7 +46,7 @@ public class AddLoginController implements Initializable {
         password.visibleProperty().bind(showPassword.selectedProperty());
 
         maskedPassword.managedProperty().bind(showPassword.selectedProperty().not());
-        maskedPassword.managedProperty().bind(showPassword.selectedProperty().not());
+        maskedPassword.visibleProperty().bind(showPassword.selectedProperty().not());
 
         password.textProperty().bindBidirectional(maskedPassword.textProperty());
 
