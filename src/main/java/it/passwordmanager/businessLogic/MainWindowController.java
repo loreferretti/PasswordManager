@@ -54,7 +54,7 @@ public class MainWindowController implements Initializable {
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
 
 
-//        getAll();
+        getAll();
 
 
         loginTable.setOnMouseClicked(event -> {
