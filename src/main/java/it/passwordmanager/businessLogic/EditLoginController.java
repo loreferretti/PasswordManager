@@ -18,6 +18,7 @@ import java.io.IOException;
 public class EditLoginController{
 
     private LoginController loginController;
+    private MainWindowController parentController;
     private Login login;
 
     @FXML
@@ -31,8 +32,9 @@ public class EditLoginController{
     @FXML
     private CheckBox showPassword;
 
-    public void initialize(Login login) {
+    public void initialize(MainWindowController parentController, Login login) {
 
+        this.parentController = parentController;
         loginController = new LoginController();
         this.login = login;
 
@@ -121,6 +123,8 @@ public class EditLoginController{
             loginController.updateLogin(login, newLogin);
 
             login = newLogin;
+
+            parentController.getAll();
         }
 
         try {
@@ -133,7 +137,7 @@ public class EditLoginController{
 
             ShowLoginController showLoginController = fxmlLoader.getController();
 
-            showLoginController.initialize(login);
+            showLoginController.initialize(parentController, login);
 
             stage.setTitle("Show Login");
             stage.setScene(scene);
