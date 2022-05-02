@@ -38,6 +38,21 @@ public class EncryptionService {
         }
     }
 
+    public String FieldEncryption(int cipherMode, String password, String field) {
+        try {
+            Key key = new SecretKeySpec(password.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(cipherMode, key);
+
+            byte[] fieldEncrypted = cipher.doFinal(field.getBytes());
+            return fieldEncrypted.toString();
+
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException |
+                 IllegalBlockSizeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void DbEncryption(int cipherMode, String password, File inputFile, File outputFile) {
 
         try {
