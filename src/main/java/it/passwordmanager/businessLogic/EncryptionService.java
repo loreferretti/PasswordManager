@@ -4,12 +4,11 @@ import javax.crypto.*;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.nio.charset.StandardCharsets;
+import java.security.*;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.util.Base64;
 
 public class EncryptionService {
     public byte[] getEncryptedPassword(String password, byte[] salt) {
@@ -34,20 +33,6 @@ public class EncryptionService {
             random.nextBytes(salt);
             return salt;
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public String FieldEncryption(int cipherMode, String password, String field) {
-        try {
-            Key key = new SecretKeySpec(password.getBytes(), "AES");
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(cipherMode, key);
-
-            return cipher.doFinal(field.getBytes()).toString();
-
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException |
-                 IllegalBlockSizeException e) {
             throw new RuntimeException(e);
         }
     }
