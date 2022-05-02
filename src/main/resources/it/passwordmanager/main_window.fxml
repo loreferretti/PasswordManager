@@ -51,7 +51,7 @@
                 <Button alignment="CENTER" mnemonicParsing="false" style="-fx-border-color: #C5C5C5; -fx-border-width: 2;" text="Search" onAction="#onSearchButtonClick"/>
             </children>
         </FlowPane>
-        <TableView fx:id="tableView" layoutX="18.0" layoutY="71.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="294.0" minWidth="580.0" prefHeight="294.0" prefWidth="940.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="74.0">
+        <TableView fx:id="loginTable" layoutX="18.0" layoutY="71.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="294.0" minWidth="580.0" prefHeight="294.0" prefWidth="940.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="74.0">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
