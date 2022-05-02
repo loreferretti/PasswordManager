@@ -54,7 +54,7 @@ public class LoginDao implements Dao<Login> {
     @Override
     public List<Login> read(Object obj) {
         Connection connection = ConnectionFactory.getConnection();
-        String query = "select website, username, password from Login where website = ?;";
+        String query = "select website, username, password from Login where website like ?%;";
 
         try {
             PreparedStatement pstat = connection.prepareStatement(query);
