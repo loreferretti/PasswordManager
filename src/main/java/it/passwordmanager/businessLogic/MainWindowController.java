@@ -220,9 +220,7 @@ public class MainWindowController implements Initializable {
 
         String searchString = searchField.getText();
 
-        //loginController.searchByWebsite(searchString); we take the result of this read and we set the items of the table
-
-        //TODO recall the loginController search method
+        setTableViewContent(loginController.searchByWebsite(searchString));
 
     }
 
