@@ -68,7 +68,7 @@ public class EncryptionService {
         }
     }
 
-    public void DbEncryption(int cipherMode, String keyVal, File inputFile, File outputFile) {
+    /*public void DbEncryption(int cipherMode, String keyVal, File inputFile, File outputFile) {
 
         try {
             Key key = new SecretKeySpec(padding(keyVal), "AES");
@@ -91,6 +91,6 @@ public class EncryptionService {
             throw new RuntimeException(e);
         }
 
-    }
+    }*/
 
 }
