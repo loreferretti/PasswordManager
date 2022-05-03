@@ -48,9 +48,10 @@ public class AuthenticationProxy implements Dao<Login> {
 
     private boolean authenticate(String password) {
 
+        IdentityManager im = new IdentityManager("src/main/resources/.passwordManager.properties");
         boolean authentication = false;
 
-        if(IdentityManager.authenticate(password)) {
+        if(im.authenticate(password)) {
             loginDao = new LoginDao();
             alreadyAuth = true;
             authentication = true;

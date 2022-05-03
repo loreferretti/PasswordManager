@@ -6,9 +6,15 @@ import java.util.Base64;
 import java.util.Properties;
 
 public class IdentityManager {
-    public static boolean authenticate(String password) {
-        boolean valid = false;
-        File fileProperties = new File("src/main/resources/.passwordManager.properties");
+    private String URL;
+
+    public IdentityManager(String path) {
+        this.URL = path;
+    }
+
+    public boolean authenticate(String password) {
+        boolean valid;
+        File fileProperties = new File(URL);
         try(FileReader reader = new FileReader(fileProperties)) {
             Properties prop = new Properties();
             prop.load(reader);
@@ -27,7 +33,7 @@ public class IdentityManager {
         return valid;
     }
 
-    private static void storePassword(Properties prop, File fileProperties, String password) {
+    private void storePassword(Properties prop, File fileProperties, String password) {
         try(FileOutputStream fos = new FileOutputStream(fileProperties)) {
             byte[] salt = EncryptionService.generateSalt();
             prop.setProperty("masterPassword", Base64.getEncoder().encodeToString(EncryptionService.getEncryptedPassword(password, salt)));
@@ -39,7 +45,7 @@ public class IdentityManager {
 
     }
 
-    private static boolean checkLogin(String password, byte[] masterPassword, byte[] salt) {
+    private boolean checkLogin(String password, byte[] masterPassword, byte[] salt) {
         byte[] masterPasswordEncrypted = EncryptionService.getEncryptedPassword(password, salt);
         return Arrays.equals(masterPassword, masterPasswordEncrypted);
     }
