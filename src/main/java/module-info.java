@@ -9,4 +9,5 @@ module it.passwordmanager {
     opens it.passwordmanager.domainModel to javafx.base;
 
     exports it.passwordmanager;
+    opens it.passwordmanager.businessLogic.fxmlController to javafx.fxml;
 }
