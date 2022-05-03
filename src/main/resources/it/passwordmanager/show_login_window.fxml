@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
             style="-fx-background-color: #e5e5e5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.passwordmanager.businessLogic.ShowLoginController">
+            fx:controller="it.passwordmanager.businessLogic.fxmlController.ShowLoginController">
     <children>
         <TextField fx:id="website" editable="false" layoutX="186.0" layoutY="73.0" style="-fx-border-width: 2; -fx-border-color: #cbe9ff;" AnchorPane.topAnchor="73.0" />
         <TextField fx:id="username" editable="false" layoutX="186.0" layoutY="148.0" style="-fx-border-width: 2; -fx-border-color: #cbe9ff;" AnchorPane.topAnchor="148.0" />

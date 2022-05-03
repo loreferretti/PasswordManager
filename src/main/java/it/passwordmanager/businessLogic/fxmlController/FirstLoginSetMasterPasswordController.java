@@ -1,9 +1,8 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
 import it.passwordmanager.Launch;
+import it.passwordmanager.businessLogic.LoginController;
 import it.passwordmanager.domainModel.Login;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,32 +40,44 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
     }
 
     @FXML
-    protected void onEnterButtonClick(ActionEvent event) throws IOException {
+    public void onEnterButtonClick(ActionEvent event) throws IOException {
 
-        if(password.getText().equals(reinsertedPassword.getText())) { //TODO check also the length of the password
+        if(password.getText().equals(reinsertedPassword.getText())) {
 
-            loginController.setPassword(password.getText());
+            if(password.getText().length() >= 8) {
 
-            List<Login> logins = loginController.getAll();
+                loginController.setPassword(password.getText());
 
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                List<Login> logins = loginController.getAll();
 
-            stage.setWidth(960);
-            stage.setHeight(540);
+                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("main_window.fxml"));
+                stage.setWidth(960);
+                stage.setHeight(540);
 
-            Scene scene = new Scene(fxmlLoader.load());
+                FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("main_window.fxml"));
 
-            MainWindowController mainWindowController = fxmlLoader.getController();
+                Scene scene = new Scene(fxmlLoader.load());
 
-            mainWindowController.initialize(logins);
+                MainWindowController mainWindowController = fxmlLoader.getController();
 
-            stage.setTitle("Password Manager");
-            stage.setScene(scene);
+                mainWindowController.initialize(logins);
 
-            stage.show();
-            stage.centerOnScreen();
+                stage.setTitle("Password Manager");
+                stage.setScene(scene);
+
+                stage.show();
+                stage.centerOnScreen();
+            }
+            else {
+
+                label.setTextFill(Color.RED);
+                label.setText("Password length is less than 8 characters. Try again!");
+
+                password.clear();
+                reinsertedPassword.clear();
+            }
+
 
         }
         else {
@@ -81,14 +92,14 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
     }
 
     @FXML
-    protected void onQuitButtonClick(ActionEvent event) {
+    public void onQuitButtonClick(ActionEvent event) {
 
         javafx.application.Platform.exit();
 
     }
 
     @FXML
-    protected void onAboutButtonClick(ActionEvent event) throws IOException{
+    public void onAboutButtonClick(ActionEvent event) throws IOException{
 
         FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("credits_dialog.fxml"));
 

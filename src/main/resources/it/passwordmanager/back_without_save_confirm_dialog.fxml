@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: #E5E5E5;"
             xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.passwordmanager.businessLogic.BackWithoutSaveOnAddConfirmDialogController">
+            fx:controller="it.passwordmanager.businessLogic.fxmlController.BackWithoutSaveOnAddConfirmDialogController">
     <children>
         <Label alignment="CENTER" layoutY="30.0" prefHeight="25.0" prefWidth="400.0" text="Are you sure you want to exit without save?">
             <font>

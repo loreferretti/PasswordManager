@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class CreditsDialogController {
 
     @FXML
-    protected void onCloseButtonClick(ActionEvent event) {
+    public void onCloseButtonClick(ActionEvent event) {
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 

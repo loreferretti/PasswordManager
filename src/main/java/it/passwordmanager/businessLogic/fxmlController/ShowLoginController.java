@@ -72,7 +72,7 @@ public class ShowLoginController {
     }
 
     @FXML
-    protected void closeStage() {
+    public void closeStage() {
 
         Stage stage = (Stage) (website.getScene().getWindow());
 

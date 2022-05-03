@@ -17,20 +17,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 public class MainWindowController {
 
     private LoginController loginController;
-
-    private ObservableList<Login> tableViewlist;
 
     @FXML
     private TableView<Login> loginTable = new TableView<>();

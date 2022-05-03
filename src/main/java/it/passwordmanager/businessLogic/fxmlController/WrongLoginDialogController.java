@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 public class WrongLoginDialogController {
 
     @FXML
-    protected void onRetryButtonClick(ActionEvent event) {
+    public void onRetryButtonClick(ActionEvent event) {
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
