@@ -1,6 +1,7 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
 import it.passwordmanager.Launch;
+import it.passwordmanager.businessLogic.LoginController;
 import it.passwordmanager.domainModel.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

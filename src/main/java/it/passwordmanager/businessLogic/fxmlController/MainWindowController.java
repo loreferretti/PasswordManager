@@ -1,13 +1,13 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
 import it.passwordmanager.Launch;
+import it.passwordmanager.businessLogic.LoginController;
 import it.passwordmanager.domainModel.Login;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -74,8 +74,7 @@ public class MainWindowController {
     }
 
 
-
-    protected void getAll() {
+    public void getAll() {
 
         List<Login> arrayList = loginController.getAll();
 
@@ -83,9 +82,9 @@ public class MainWindowController {
 
     }
 
-    protected void setTableViewContent(List<Login> list) {
+    public void setTableViewContent(List<Login> list) {
 
-        tableViewlist = FXCollections.observableArrayList(list);
+        ObservableList<Login> tableViewlist = FXCollections.observableArrayList(list);
 
         loginTable.setItems(tableViewlist);
 
