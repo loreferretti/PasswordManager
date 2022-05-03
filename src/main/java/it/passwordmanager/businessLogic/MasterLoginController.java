@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 
@@ -22,11 +23,19 @@ public class MasterLoginController implements Initializable {
 
     @FXML
     private PasswordField password;
+    @FXML
+    private Button enter;
+    @FXML
+    private Button quit;
+    @FXML
+    private Button about;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         loginController = LoginController.getInstance();
+
+        disableFocus();
 
     }
 
@@ -67,7 +76,7 @@ public class MasterLoginController implements Initializable {
 
             Stage stage = new Stage();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("wrong_login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("wrong_login_dialog.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 
@@ -105,6 +114,14 @@ public class MasterLoginController implements Initializable {
         creditsStage.show();
         creditsStage.centerOnScreen();
 
+    }
+
+    @FXML
+    private void disableFocus() {
+        password.setFocusTraversable(false);
+        enter.setFocusTraversable(false);
+        quit.setFocusTraversable(false);
+        about.setFocusTraversable(false);
     }
 
 }
