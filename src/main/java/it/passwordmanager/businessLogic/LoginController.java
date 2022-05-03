@@ -53,15 +53,4 @@ public class LoginController {
         return proxy.read(password, searchString);
     }
 
-    public boolean storeAndEncryptPassword(String password) {
-        return false;
-    }
-
-    public boolean authenticate() {
-
-        proxy = new AuthenticationProxy();
-
-        return false;
-    }
-
 }
