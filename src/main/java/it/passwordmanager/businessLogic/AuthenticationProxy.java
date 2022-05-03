@@ -10,47 +10,34 @@ public class AuthenticationProxy implements Dao<Login> {
     private LoginDao loginDao;
     private IdentityManager identityManager;
 
-    /*private void initDao() {
-
-        loginDao = new LoginDao();
-
-    }*/
-    public AuthenticationProxy() {
-        //FIXME loginDao inizializzato una volta nel costruttore e basta sennò ogni volta lo rinizializza però deve essere inizializzato nell'authenticate
-        loginDao = new LoginDao();
-    }
-
     @Override
     public List<Login> getAll(String password) {
-        //initDao();
-
-        return loginDao.getAll(password);
+        if(authenticate(password))
+            return loginDao.getAll(password);
+        else
+            return null;
     }
 
     @Override
-    public void create(String password, Login login) {
-        //initDao();
+    public boolean create(String password, Login login) {
 
-        loginDao.create(password, login);
+        return loginDao.create(password, login);
     }
 
     @Override
     public List<Login> read(String password, Object obj) {
-        //initDao();
 
         return loginDao.read(password, obj);
     }
 
     @Override
-    public void update(String password, Login login) {
-        //initDao();
+    public boolean update(String password, Login login) {
 
-        loginDao.update(password, login);
+        return loginDao.update(password, login);
     }
 
     @Override
     public void delete(Login login) {
-        //initDao();
 
         loginDao.delete(login);
     }
