@@ -25,9 +25,9 @@ public class AuthenticationProxy implements Dao<Login> {
     }
 
     @Override
-    public List<Login> read(String password, Object obj) {
+    public List<Login> read(Object obj) {
 
-        return loginDao.read(password, obj);
+        return loginDao.read(obj);
     }
 
     @Override

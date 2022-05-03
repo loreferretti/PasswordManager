@@ -50,7 +50,7 @@ public class LoginController {
     }
 
     public List<Login> searchByWebsite(String searchString) {
-        return proxy.read(password, searchString);
+        return proxy.read(searchString);
     }
 
 }
