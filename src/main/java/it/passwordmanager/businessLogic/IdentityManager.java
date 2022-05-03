@@ -6,7 +6,7 @@ import java.util.Base64;
 import java.util.Properties;
 
 public class IdentityManager {
-    public boolean authenticate(String password) {
+    public static boolean authenticate(String password) {
         boolean valid = false;
         File fileProperties = new File("src/main/resources/.passwordManager.properties");
         try(FileReader reader = new FileReader(fileProperties)) {
@@ -27,11 +27,10 @@ public class IdentityManager {
         return valid;
     }
 
-    private void storePassword(Properties prop, File fileProperties, String password) {
+    private static void storePassword(Properties prop, File fileProperties, String password) {
         try(FileOutputStream fos = new FileOutputStream(fileProperties)) {
-            EncryptionService es = new EncryptionService();
-            byte[] salt = es.generateSalt();
-            prop.setProperty("masterPassword", Base64.getEncoder().encodeToString(es.getEncryptedPassword(password, salt)));
+            byte[] salt = EncryptionService.generateSalt();
+            prop.setProperty("masterPassword", Base64.getEncoder().encodeToString(EncryptionService.getEncryptedPassword(password, salt)));
             prop.setProperty("salt", Base64.getEncoder().encodeToString(salt));
             prop.store(fos, null);
         } catch (IOException e) {
@@ -40,9 +39,8 @@ public class IdentityManager {
 
     }
 
-    private boolean checkLogin(String password, byte[] masterPassword, byte[] salt) {
-        EncryptionService encryptionService = new EncryptionService();
-        byte[] masterPasswordEncrypted = encryptionService.getEncryptedPassword(password, salt);
+    private static boolean checkLogin(String password, byte[] masterPassword, byte[] salt) {
+        byte[] masterPasswordEncrypted = EncryptionService.getEncryptedPassword(password, salt);
         return Arrays.equals(masterPassword, masterPasswordEncrypted);
     }
 

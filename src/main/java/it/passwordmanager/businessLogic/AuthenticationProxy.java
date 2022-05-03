@@ -44,12 +44,11 @@ public class AuthenticationProxy implements Dao<Login> {
 
     private boolean authenticate(String password) {
 
-        identityManager = new IdentityManager();
-
         boolean authentication = false;
 
-        if(identityManager.authenticate(password)) {
+        if(IdentityManager.authenticate(password)) {
             loginDao = new LoginDao();
+            alreadyAuth = true;
             authentication = true;
         }
 

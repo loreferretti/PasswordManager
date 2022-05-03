@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class PasswordGenerator {
 
-    public String generate() {
+    public static String generate() {
         int length = 16;
         String alphabet = getAlphabet();
         String password = "";
@@ -15,7 +15,7 @@ public class PasswordGenerator {
         return password;
     }
 
-    private String getAlphabet() {
+    private static String getAlphabet() {
         String alphabet = "";
         for (char c = 'A'; c <= 'Z'; c++)
             alphabet += c;
