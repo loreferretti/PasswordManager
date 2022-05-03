@@ -16,10 +16,14 @@ import java.util.stream.Collectors;
 public class LoginDao implements Dao<Login> {
 
     private ArrayList<Login> logins;
+    private final String URL;
+    public LoginDao(final String URL) {
+        this.URL = URL;
+    }
 
     @Override
     public List<Login> getAll(String password) {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection(URL);
         String query = "select id, website, username, password from Login;";
         try {
             PreparedStatement pstat = connection.prepareStatement(query);
@@ -41,7 +45,7 @@ public class LoginDao implements Dao<Login> {
 
     @Override
     public boolean create(String password, Login login) {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection(URL);
         String query = "insert into Login (website, username, password) values (?, ?, ?);";
         boolean valid = true;
         try {
@@ -67,7 +71,7 @@ public class LoginDao implements Dao<Login> {
 
     @Override
     public boolean update(String password, Login login) {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection(URL);
         String query = "update Login set website = ?, username = ?, password = ? where id = ?;";
         boolean valid = true;
         try {
@@ -89,7 +93,7 @@ public class LoginDao implements Dao<Login> {
 
     @Override
     public void delete(Login login) {
-        Connection connection = ConnectionFactory.getConnection();
+        Connection connection = ConnectionFactory.getConnection(URL);
         String query = "delete from Login where id = ?;";
         try {
             PreparedStatement pstat = connection.prepareStatement(query);

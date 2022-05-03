@@ -52,7 +52,7 @@ public class AuthenticationProxy implements Dao<Login> {
         boolean authentication = false;
 
         if(im.authenticate(password)) {
-            loginDao = new LoginDao();
+            loginDao = new LoginDao("jdbc:sqlite:db-login.db");
             alreadyAuth = true;
             authentication = true;
         }
