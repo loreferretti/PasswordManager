@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class EncryptionServiceTest {
 
     @Test
-    void encrypt() {
-    }
-
-    @Test
-    void decrypt() {
+    void encryptDecrypt() {
+        String keyVal = "myPassword";
+        String field = "This is the field to be encrypt";
+        String fieldEncrypted = EncryptionService.encrypt(keyVal, field);
+        assertEquals(field, EncryptionService.decrypt(keyVal,fieldEncrypted));
     }
 }
