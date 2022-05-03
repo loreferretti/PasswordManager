@@ -36,6 +36,8 @@ public class ShowLoginController {
 
     public void initialize(MainWindowController parentController, Login login) {
 
+        disableFocus();
+
         this.parentController = parentController;
         this.loginController = LoginController.getInstance();
         this.login = login;
@@ -58,6 +60,15 @@ public class ShowLoginController {
 
         password.textProperty().bindBidirectional(maskedPassword.textProperty());
 
+    }
+
+    @FXML
+    private void disableFocus() {
+        website.setFocusTraversable(false);
+        username.setFocusTraversable(false);
+        password.setFocusTraversable(false);
+        maskedPassword.setFocusTraversable(false);
+        showPassword.setFocusTraversable(false);
     }
 
     @FXML
