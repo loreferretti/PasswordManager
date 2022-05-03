@@ -8,8 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,10 +33,12 @@ public class EditLoginController{
     private PasswordField editPasswordMasked;
     @FXML
     private CheckBox showPassword;
+    @FXML
+    private Label errorLabel;
 
     public void initialize(MainWindowController parentController, Login login) {
 
-        //TODO add button to generate the password
+        disableFocus();
 
         this.parentController = parentController;
         loginController = LoginController.getInstance();
@@ -61,6 +65,16 @@ public class EditLoginController{
     }
 
     @FXML
+    private void disableFocus() {
+        editWebsite.setFocusTraversable(false);
+        editUsername.setFocusTraversable(false);
+        editPassword.setFocusTraversable(false);
+        editPasswordMasked.setFocusTraversable(false);
+        showPassword.setFocusTraversable(false);
+        errorLabel.setFocusTraversable(false);
+    }
+
+    @FXML
     protected void closeStage() {
 
         Stage stage = (Stage) (editWebsite.getScene().getWindow());
@@ -74,7 +88,7 @@ public class EditLoginController{
 
         try {
 
-            if(!editWebsite.getText().equals(login.getWebsite()) || !editWebsite.getText().equals(login.getUsername())
+            if(!editWebsite.getText().equals(login.getWebsite()) || !editUsername.getText().equals(login.getUsername())
                     || !editPassword.getText().equals(login.getPassword())) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("back_without_save_confirm_dialog_on_edit.fxml"));
@@ -115,6 +129,15 @@ public class EditLoginController{
     }
 
     @FXML
+    public void onGeneratePasswordButtonClick(ActionEvent event) {
+
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+
+        editPassword.setText(passwordGenerator.generate());
+
+    }
+
+    @FXML
     protected void onSaveButtonClick(ActionEvent event) {
         String website = login.getWebsite();
         String username = login.getUsername();
@@ -128,43 +151,17 @@ public class EditLoginController{
             login.setPassword(editPassword.getText());
 
             if(!loginController.updateLogin(login)) {
-                System.out.println("Already existing");
-                //FIXME add dialog to show the already existence of a login
-                login.setWebsite(website);
-                login.setUsername(username);
-                login.setPassword(password);
+                errorLabel.setTextFill(Color.RED);
+                errorLabel.setText("This login already exists!");
+            }
+            else {
+                closeStage();
+
+                parentController.getAll();
             }
 
-            parentController.getAll();
-
-            //TODO do not show the login tab after the edit of a login
         }
-
-        try {
-
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("show_login_window.fxml"));
-
-            Scene scene = new Scene(fxmlLoader.load());
-
-            ShowLoginController showLoginController = fxmlLoader.getController();
-
-            showLoginController.initialize(parentController, login);
-
-            stage.setTitle("Show Login");
-            stage.setScene(scene);
-            stage.setResizable(false);
-
-            stage.show();
-            stage.centerOnScreen();
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-
-        }
-
+        else
+            closeStage();
     }
 }
