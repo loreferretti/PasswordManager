@@ -8,14 +8,18 @@ import java.util.List;
 
 public class AuthenticationProxy implements Dao<Login> {
     private LoginDao loginDao;
-    private IdentityManager identityManager;
+    private boolean alreadyAuth = false;
 
     @Override
     public List<Login> getAll(String password) {
-        if(authenticate(password))
-            return loginDao.getAll(password);
+        if(!alreadyAuth) {
+            if(authenticate(password))
+                return loginDao.getAll(password);
+            else
+                return null;
+        }
         else
-            return null;
+            return loginDao.getAll(password);
     }
 
     @Override
