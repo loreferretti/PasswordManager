@@ -37,9 +37,10 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public void create(String password, Login login) {
+    public boolean create(String password, Login login) {
         Connection connection = ConnectionFactory.getConnection();
         String query = "insert into Login (website, username, password) values (?, ?, ?);";
+        boolean valid = true;
         try {
             EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
@@ -49,8 +50,10 @@ public class LoginDao implements Dao<Login> {
 
             pstat.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if (e.getMessage().contains("UNIQUE"))
+                valid = false;
         }
+        return valid;
     }
 
     //FIXME read non funziona
@@ -77,9 +80,10 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public void update(String password, Login login) {
+    public boolean update(String password, Login login) {
         Connection connection = ConnectionFactory.getConnection();
         String query = "update Login set website = ?, username = ?, password = ? where id = ?;";
+        boolean valid = true;
         try {
             EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
@@ -91,8 +95,10 @@ public class LoginDao implements Dao<Login> {
 
             pstat.execute();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            if(e.getMessage().contains("UNIQUE"))
+                valid = false;
         }
+        return valid;
     }
 
     @Override
