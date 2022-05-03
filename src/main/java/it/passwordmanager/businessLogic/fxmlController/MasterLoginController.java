@@ -40,7 +40,7 @@ public class MasterLoginController implements Initializable {
     }
 
     @FXML
-    protected void onEnterButtonClick(ActionEvent event) throws IOException {
+    public void onEnterButtonClick(ActionEvent event) throws IOException {
 
         String masterPassword = password.getText();
 
@@ -92,14 +92,14 @@ public class MasterLoginController implements Initializable {
     }
 
     @FXML
-    protected void onQuitButtonClick(ActionEvent event) {
+    public void onQuitButtonClick(ActionEvent event) {
 
         javafx.application.Platform.exit();
 
     }
 
     @FXML
-    protected void onAboutButtonClick(ActionEvent event) throws IOException {
+    public void onAboutButtonClick(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("credits_dialog.fxml"));
 
@@ -117,7 +117,7 @@ public class MasterLoginController implements Initializable {
     }
 
     @FXML
-    private void disableFocus() {
+    public void disableFocus() {
         password.setFocusTraversable(false);
         enter.setFocusTraversable(false);
         quit.setFocusTraversable(false);

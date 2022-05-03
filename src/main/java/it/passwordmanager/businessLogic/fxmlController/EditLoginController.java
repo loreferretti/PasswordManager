@@ -1,6 +1,8 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
 import it.passwordmanager.Launch;
+import it.passwordmanager.businessLogic.LoginController;
+import it.passwordmanager.businessLogic.PasswordGenerator;
 import it.passwordmanager.domainModel.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -84,7 +86,7 @@ public class EditLoginController{
     }
 
     @FXML
-    protected void onBackButtonClick(ActionEvent event) {
+    public void onBackButtonClick(ActionEvent event) {
 
         try {
 
@@ -131,14 +133,12 @@ public class EditLoginController{
     @FXML
     public void onGeneratePasswordButtonClick(ActionEvent event) {
 
-        PasswordGenerator passwordGenerator = new PasswordGenerator();
-
-        editPassword.setText(passwordGenerator.generate());
+        editPassword.setText(PasswordGenerator.generate());
 
     }
 
     @FXML
-    protected void onSaveButtonClick(ActionEvent event) {
+    public void onSaveButtonClick(ActionEvent event) {
         String website = login.getWebsite();
         String username = login.getUsername();
         String password = login.getPassword();

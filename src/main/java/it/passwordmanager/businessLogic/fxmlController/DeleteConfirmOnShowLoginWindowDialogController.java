@@ -1,5 +1,6 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
+import it.passwordmanager.businessLogic.LoginController;
 import it.passwordmanager.domainModel.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class DeleteConfirmOnShowLoginWindowDialogController {
     }
 
     @FXML
-    protected void onYesButtonClick(ActionEvent event) {
+    public void onYesButtonClick(ActionEvent event) {
 
         loginController.deleteLogin(login);
 

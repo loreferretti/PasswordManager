@@ -124,14 +124,14 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void handleShowLoginClick(ActionEvent event) {
+    public void handleShowLoginClick(ActionEvent event) {
 
         showLoginClick();
 
     }
 
     @FXML
-    protected void handleEditLoginClick(ActionEvent event) {
+    public void handleEditLoginClick(ActionEvent event) {
 
         try {
 
@@ -165,7 +165,7 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void handleDeleteLoginClick(ActionEvent event) {
+    public void handleDeleteLoginClick(ActionEvent event) {
 
         Login login = loginTable.getSelectionModel().getSelectedItem();
 
@@ -197,7 +197,7 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void handleCopyWebsiteClick(ActionEvent event) {
+    public void handleCopyWebsiteClick(ActionEvent event) {
 
         String website = loginTable.getSelectionModel().getSelectedItem().getWebsite();
 
@@ -211,7 +211,7 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void handleCopyUsernameClick(ActionEvent event) {
+    public void handleCopyUsernameClick(ActionEvent event) {
 
         String website = loginTable.getSelectionModel().getSelectedItem().getUsername();
 
@@ -225,7 +225,7 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void handleCopyPasswordClick(ActionEvent event) {
+    public void handleCopyPasswordClick(ActionEvent event) {
 
         String website = loginTable.getSelectionModel().getSelectedItem().getPassword();
 
@@ -246,7 +246,7 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void onAddButtonClick(ActionEvent event) {
+    public void onAddButtonClick(ActionEvent event) {
 
         try {
 
@@ -278,14 +278,14 @@ public class MainWindowController {
     }
 
     @FXML
-    protected void onQuitButtonClick(ActionEvent event) {
+    public void onQuitButtonClick(ActionEvent event) {
 
         javafx.application.Platform.exit();
 
     }
 
     @FXML
-    protected void onAboutButtonClick(ActionEvent event) {
+    public void onAboutButtonClick(ActionEvent event) {
 
         try {
 

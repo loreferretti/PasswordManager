@@ -82,7 +82,7 @@ public class ShowLoginController {
 
 
     @FXML
-    protected void onCopyWebsiteButtonClick(ActionEvent event) {
+    public void onCopyWebsiteButtonClick(ActionEvent event) {
 
         Clipboard clipboard = Clipboard.getSystemClipboard();
 
@@ -94,7 +94,7 @@ public class ShowLoginController {
     }
 
     @FXML
-    protected void onCopyUsernameButtonClick(ActionEvent event) {
+    public void onCopyUsernameButtonClick(ActionEvent event) {
 
         Clipboard clipboard = Clipboard.getSystemClipboard();
 
@@ -106,7 +106,7 @@ public class ShowLoginController {
     }
 
     @FXML
-    protected void onCopyPasswordButtonClick(ActionEvent event) {
+    public void onCopyPasswordButtonClick(ActionEvent event) {
 
         Clipboard clipboard = Clipboard.getSystemClipboard();
 
@@ -118,14 +118,14 @@ public class ShowLoginController {
     }
 
     @FXML
-    protected void onCloseButtonClick(ActionEvent event) {
+    public void onCloseButtonClick(ActionEvent event) {
 
         closeStage();
 
     }
 
     @FXML
-    protected void onEditButtonClick(ActionEvent event) {
+    public void onEditButtonClick(ActionEvent event) {
 
         try {
 
@@ -156,7 +156,7 @@ public class ShowLoginController {
     }
 
     @FXML
-    protected void onDeleteButtonClick(ActionEvent event) {
+    public void onDeleteButtonClick(ActionEvent event) {
 
         try {
 

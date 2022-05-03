@@ -73,9 +73,7 @@ public class AddLoginController {
     @FXML
     public void onGeneratePasswordButtonClick(ActionEvent event) {
 
-        PasswordGenerator passwordGenerator = new PasswordGenerator();
-
-        maskedPassword.setText(passwordGenerator.generate());
+        maskedPassword.setText(PasswordGenerator.generate());
 
     }
 
@@ -143,12 +141,10 @@ public class AddLoginController {
             }
         }
         else {
+
             errorLabel.setTextFill(Color.RED);
             errorLabel.setText("It cannot be inserted a login with blank fields");
 
-            website.clear();
-            username.clear();
-            password.clear();
         }
 
     }
@@ -162,6 +158,7 @@ public class AddLoginController {
         showPassword.setFocusTraversable(false);
         errorLabel.setFocusTraversable(false);
     }
+
 }
 
 

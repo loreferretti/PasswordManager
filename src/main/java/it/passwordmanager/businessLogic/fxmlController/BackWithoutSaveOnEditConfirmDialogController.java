@@ -1,5 +1,6 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
+import it.passwordmanager.businessLogic.LoginController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,7 +21,7 @@ public class BackWithoutSaveOnEditConfirmDialogController {
     }
 
     @FXML
-    protected void onNoButtonClick(ActionEvent event) {
+    public void onNoButtonClick(ActionEvent event) {
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
@@ -29,7 +30,7 @@ public class BackWithoutSaveOnEditConfirmDialogController {
     }
 
     @FXML
-    protected void onYesButtonClick(ActionEvent event) {
+    public void onYesButtonClick(ActionEvent event) {
 
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
