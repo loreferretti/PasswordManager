@@ -124,19 +124,29 @@ public class AddLoginController {
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
 
-        if(!loginController.addLogin(new Login(website.getText(), username.getText(), password.getText()))) {
+        if(!website.getText().equals("") && !username.getText().equals("") && !password.getText().equals("")) {
+            if(!loginController.addLogin(new Login(website.getText(), username.getText(), password.getText()))) {
+                errorLabel.setTextFill(Color.RED);
+                errorLabel.setText("This login already exists!");
+
+                website.clear();
+                username.clear();
+                password.clear();
+            }
+            else{
+
+                closeStage();
+
+                parentController.getAll();
+            }
+        }
+        else {
             errorLabel.setTextFill(Color.RED);
-            errorLabel.setText("This login already exists!");
+            errorLabel.setText("It cannot be inserted a login with blank fields");
 
             website.clear();
             username.clear();
             password.clear();
-        }
-        else{
-
-            closeStage();
-
-            parentController.getAll();
         }
 
     }

@@ -144,24 +144,45 @@ public class EditLoginController{
         String password = login.getPassword();
 
         if (!editWebsite.getText().equals(website) || !editUsername.getText().equals(username)
-                || !editPassword.getText().equals(password)) {
+                || !editPassword.getText().equals(password) ) {
 
-            login.setWebsite(editWebsite.getText());
-            login.setUsername(editUsername.getText());
-            login.setPassword(editPassword.getText());
+            if(!editWebsite.getText().equals("") &&
+                !editUsername.getText().equals("") && !editPassword.getText().equals("")) {
 
-            if(!loginController.updateLogin(login)) {
-                errorLabel.setTextFill(Color.RED);
-                errorLabel.setText("This login already exists!");
+                login.setWebsite(editWebsite.getText());
+                login.setUsername(editUsername.getText());
+                login.setPassword(editPassword.getText());
+
+                if(!loginController.updateLogin(login)) {
+
+                    errorLabel.setTextFill(Color.RED);
+                    errorLabel.setText("This login already exists!");
+
+                }
+                else {
+
+                    closeStage();
+
+                    parentController.getAll();
+
+                }
+
             }
             else {
-                closeStage();
+                errorLabel.setTextFill(Color.RED);
+                errorLabel.setText("It cannot be inserted a login with blank fields");
 
-                parentController.getAll();
+                editWebsite.setText(website);
+                editUsername.setText(username);
+                editPassword.setText(password);
             }
+
 
         }
         else
             closeStage();
+
     }
+
+
 }
