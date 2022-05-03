@@ -109,8 +109,7 @@ public class LoginDao implements Dao<Login> {
         String password = EncryptionService.decrypt(paddedPassword, rs.getString("password"));
         int id = rs.getInt("id");
 
-        Login login = new Login(id, website, username, password);
-        return login;
+        return new Login(id, website, username, password);
 
     }
 
