@@ -45,11 +45,11 @@ public class LoginDao implements Dao<Login> {
         String query = "insert into Login (website, username, password) values (?, ?, ?);";
         boolean valid = true;
         try {
-            EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, es.encrypt(new String(es.padding(password)), login.getWebsite()));
-            pstat.setString(2, es.encrypt(new String(es.padding(password)), login.getUsername()));
-            pstat.setString(3, es.encrypt(new String(es.padding(password)), login.getPassword()));
+            String paddedPassword = new String(EncryptionService.padding(password));
+            pstat.setString(1, EncryptionService.encrypt(paddedPassword, login.getWebsite()));
+            pstat.setString(2, EncryptionService.encrypt(paddedPassword, login.getUsername()));
+            pstat.setString(3, EncryptionService.encrypt(paddedPassword, login.getPassword()));
 
             pstat.execute();
         } catch (SQLException e) {
@@ -71,11 +71,11 @@ public class LoginDao implements Dao<Login> {
         String query = "update Login set website = ?, username = ?, password = ? where id = ?;";
         boolean valid = true;
         try {
-            EncryptionService es = new EncryptionService();
             PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, es.encrypt(new String(es.padding(password)),login.getWebsite()));
-            pstat.setString(2, es.encrypt(new String(es.padding(password)),login.getUsername()));
-            pstat.setString(3, es.encrypt(new String(es.padding(password)),login.getPassword()));
+            String paddedPassword = new String(EncryptionService.padding(password));
+            pstat.setString(1, EncryptionService.encrypt(paddedPassword,login.getWebsite()));
+            pstat.setString(2, EncryptionService.encrypt(paddedPassword,login.getUsername()));
+            pstat.setString(3, EncryptionService.encrypt(paddedPassword,login.getPassword()));
 
             pstat.setString(4, Integer.toString(login.getId()));
 
@@ -103,10 +103,10 @@ public class LoginDao implements Dao<Login> {
 
     private Login extractLogin(String pass, ResultSet rs) throws SQLException {
 
-        EncryptionService es = new EncryptionService();
-        String website = es.decrypt(new String(es.padding(pass)),rs.getString("website"));
-        String username = es.decrypt(new String(es.padding(pass)), rs.getString("username"));
-        String password = es.decrypt(new String(es.padding(pass)), rs.getString("password"));
+        String paddedPassword = new String(EncryptionService.padding(pass));
+        String website = EncryptionService.decrypt(paddedPassword,rs.getString("website"));
+        String username = EncryptionService.decrypt(paddedPassword, rs.getString("username"));
+        String password = EncryptionService.decrypt(paddedPassword, rs.getString("password"));
         int id = rs.getInt("id");
 
         Login login = new Login(id, website, username, password);
