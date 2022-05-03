@@ -37,12 +37,12 @@ public class LoginController {
         return proxy.getAll(password);
     }
 
-    public void addLogin(Login login) {
-        proxy.create(password, login);
+    public boolean addLogin(Login login) {
+        return proxy.create(password, login);
     }
 
-    public void updateLogin(Login login) {
-        proxy.update(password, login);
+    public boolean updateLogin(Login login) {
+        return proxy.update(password, login);
     }
 
     public void deleteLogin(Login login) {
