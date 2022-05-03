@@ -43,7 +43,7 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
     @FXML
     protected void onEnterButtonClick(ActionEvent event) throws IOException {
 
-        if(password.getText().equals(reinsertedPassword.getText())) { //check also the length of the password
+        if(password.getText().equals(reinsertedPassword.getText())) { //TODO check also the length of the password
 
             loginController.setPassword(password.getText());
 
