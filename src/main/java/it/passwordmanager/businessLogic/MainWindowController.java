@@ -17,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -25,7 +26,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MainWindowController implements Initializable {
+public class MainWindowController {
 
     private LoginController loginController;
 
@@ -42,9 +43,12 @@ public class MainWindowController implements Initializable {
     @FXML
     private TextField searchField;
 
-    public void initialize(URL location, ResourceBundle resource) {
+    public void initialize(List<Login> list) {
 
-        loginController =   LoginController.getInstance();
+        searchField.setFocusTraversable(false);
+        loginTable.setFocusTraversable(false);
+
+        loginController = LoginController.getInstance();
 
 
         loginTable.setPlaceholder(new Label("The table is empty"));
@@ -54,7 +58,7 @@ public class MainWindowController implements Initializable {
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
 
 
-        getAll();
+        setTableViewContent(list);
 
 
 
