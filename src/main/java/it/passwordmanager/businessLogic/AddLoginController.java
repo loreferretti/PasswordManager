@@ -5,22 +5,21 @@ import it.passwordmanager.domainModel.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class AddLoginController {
+
+    //FIXME fix the focus on the elements of the scene
 
     private LoginController loginController;
     private MainWindowController parentController;
@@ -35,11 +34,13 @@ public class AddLoginController {
     private PasswordField maskedPassword;
     @FXML
     private CheckBox showPassword;
+    @FXML
+    private Label errorLabel;
 
 
     public void initialize(MainWindowController parentController) {
 
-        //TODO add button to generate the password
+        disableFocus();
 
         loginController = LoginController.getInstance();
 
@@ -64,6 +65,15 @@ public class AddLoginController {
         Stage stage = (Stage) (website.getScene().getWindow());
 
         stage.close();
+
+    }
+
+    @FXML
+    public void onGeneratePasswordButtonClick(ActionEvent event) {
+
+        PasswordGenerator passwordGenerator = new PasswordGenerator();
+
+        maskedPassword.setText(passwordGenerator.generate());
 
     }
 
@@ -114,16 +124,31 @@ public class AddLoginController {
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
 
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        if(!loginController.addLogin(new Login(website.getText(), username.getText(), password.getText()))) {
+            errorLabel.setTextFill(Color.RED);
+            errorLabel.setText("This login already exists!");
 
-        stage.close();
+            website.clear();
+            username.clear();
+            password.clear();
+        }
+        else{
 
-        if(!loginController.addLogin(new Login(website.getText(), username.getText(), password.getText())))
-            System.out.println("Already existing");
-        //FIXME add something to display the existence of a login
+            closeStage();
 
-        parentController.getAll();
+            parentController.getAll();
+        }
 
+    }
+
+    @FXML
+    private void disableFocus() {
+        website.setFocusTraversable(false);
+        username.setFocusTraversable(false);
+        password.setFocusTraversable(false);
+        maskedPassword.setFocusTraversable(false);
+        showPassword.setFocusTraversable(false);
+        errorLabel.setFocusTraversable(false);
     }
 }
 
