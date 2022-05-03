@@ -11,8 +11,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LoginDao implements Dao<Login> {
+
+    private ArrayList<Login> logins;
 
     @Override
     public List<Login> getAll(String password) {
@@ -22,7 +25,7 @@ public class LoginDao implements Dao<Login> {
             PreparedStatement pstat = connection.prepareStatement(query);
             ResultSet rs = pstat.executeQuery();
 
-            ArrayList<Login>  logins = new ArrayList<>();
+            logins = new ArrayList<>();
             while(rs.next()) {
                 Login login = extractLogin(password, rs);
                 logins.add(login);
@@ -55,28 +58,11 @@ public class LoginDao implements Dao<Login> {
         }
         return valid;
     }
-
-    //FIXME read non funziona
     @Override
-    public List<Login> read(String password, Object obj) {
-        Connection connection = ConnectionFactory.getConnection();
-        String query = "select id, website, username, password from Login where website like ?;";
-
-        try {
-            EncryptionService es = new EncryptionService();
-            PreparedStatement pstat = connection.prepareStatement(query);
-            pstat.setString(1, es.encrypt(new String(es.padding(password)), String.valueOf(obj) + '%'));
-
-            ResultSet rs = pstat.executeQuery();
-            ArrayList<Login>  logins = new ArrayList<>();
-            while(rs.next()) {
-                Login login = extractLogin(password, rs);
-                logins.add(login);
-            }
-            return logins;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public List<Login> read(Object obj) {
+        return logins.stream()
+                .filter(l -> l.getWebsite().startsWith(String.valueOf(obj)))
+                .collect(Collectors.toList());
     }
 
     @Override
