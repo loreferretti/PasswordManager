@@ -3,7 +3,6 @@ package it.passwordmanager.businessLogic;
 import it.passwordmanager.dao.Dao;
 import it.passwordmanager.domainModel.Login;
 
-import java.io.*;
 import java.util.List;
 
 public class LoginController {
@@ -22,11 +21,6 @@ public class LoginController {
 
     private LoginController() {
         this.proxy = new AuthenticationProxy();
-    }
-
-    private LoginController(String password) {
-        this.proxy = new AuthenticationProxy();
-        this.password = password;
     }
 
     public void setPassword(String password) {
