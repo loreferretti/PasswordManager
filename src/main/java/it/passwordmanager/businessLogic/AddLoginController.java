@@ -39,6 +39,8 @@ public class AddLoginController {
 
     public void initialize(MainWindowController parentController) {
 
+        //TODO add button to generate the password
+
         loginController = LoginController.getInstance();
 
         this.parentController = parentController;

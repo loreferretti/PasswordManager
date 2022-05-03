@@ -34,6 +34,8 @@ public class EditLoginController{
 
     public void initialize(MainWindowController parentController, Login login) {
 
+        //TODO add button to generate the password
+
         this.parentController = parentController;
         loginController = LoginController.getInstance();
         this.login = login;
