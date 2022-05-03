@@ -42,10 +42,17 @@ public class AuthenticationProxy implements Dao<Login> {
         loginDao.delete(login);
     }
 
-    public boolean authenticate(String password) {
+    private boolean authenticate(String password) {
 
         identityManager = new IdentityManager();
 
-        return identityManager.authenticate(password);
+        boolean authentication = false;
+
+        if(identityManager.authenticate(password)) {
+            loginDao = new LoginDao();
+            authentication = true;
+        }
+
+        return authentication;
     }
 }
