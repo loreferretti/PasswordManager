@@ -116,17 +116,28 @@ public class EditLoginController{
 
     @FXML
     protected void onSaveButtonClick(ActionEvent event) {
+        String website = login.getWebsite();
+        String username = login.getUsername();
+        String password = login.getPassword();
 
-        if (!editWebsite.getText().equals(login.getWebsite()) || !editWebsite.getText().equals(login.getUsername())
-                || !editPassword.getText().equals(login.getPassword())) {
+        if (!editWebsite.getText().equals(website) || !editUsername.getText().equals(username)
+                || !editPassword.getText().equals(password)) {
 
             login.setWebsite(editWebsite.getText());
             login.setUsername(editUsername.getText());
             login.setPassword(editPassword.getText());
 
-            loginController.updateLogin(login);
+            if(!loginController.updateLogin(login)) {
+                System.out.println("Already existing");
+                //FIXME add dialog to show the already existence of a login
+                login.setWebsite(website);
+                login.setUsername(username);
+                login.setPassword(password);
+            }
 
             parentController.getAll();
+
+            //TODO do not show the login tab after the edit of a login
         }
 
         try {
