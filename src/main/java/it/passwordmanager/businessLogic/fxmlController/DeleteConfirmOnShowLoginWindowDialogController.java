@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
-public class DeleteConfirmDialogController {
+public class DeleteConfirmOnShowLoginWindowDialogController {
 
     private LoginController loginController;
     private MainWindowController parentController;
@@ -47,7 +47,6 @@ public class DeleteConfirmDialogController {
         stage.close();
 
         showLoginController.closeStage();
-
 
 
     }

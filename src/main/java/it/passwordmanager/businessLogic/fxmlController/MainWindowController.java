@@ -174,9 +174,30 @@ public class MainWindowController {
 
         Login login = loginTable.getSelectionModel().getSelectedItem();
 
-        loginController.deleteLogin(login);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("delete_confirm_dialog_main_window.fxml"));
 
-        getAll();
+            Stage stage = new Stage();
+
+            Scene scene = new Scene(fxmlLoader.load());
+
+            DeleteConfirmOnMainWindowDialogController deleteConfirmOnMainWindowDialogController = fxmlLoader.getController();
+
+            deleteConfirmOnMainWindowDialogController.initialize(this, login);
+
+            stage.setTitle("Delete Confirm");
+            stage.setScene(scene);
+            stage.setResizable(false);
+
+            stage.show();
+            stage.centerOnScreen();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+
 
     }
 

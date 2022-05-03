@@ -166,7 +166,7 @@ public class ShowLoginController {
 
             Scene scene = new Scene(fxmlLoader.load());
 
-            DeleteConfirmDialogController deleteConfirmDialogController = fxmlLoader.getController();
+            DeleteConfirmOnShowLoginWindowDialogController deleteConfirmDialogController = fxmlLoader.getController();
 
             deleteConfirmDialogController.initialize(this, parentController, login);
 
