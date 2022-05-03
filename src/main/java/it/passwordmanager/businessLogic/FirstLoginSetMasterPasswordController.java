@@ -36,6 +36,8 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
 
         loginController = LoginController.getInstance();
 
+        disableFocus();
+
     }
 
     @FXML
@@ -101,6 +103,13 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
         creditsStage.show();
         creditsStage.centerOnScreen();
 
+    }
+
+    @FXML
+    private void disableFocus() {
+        password.setFocusTraversable(false);
+        reinsertedPassword.setFocusTraversable(false);
+        label.setFocusTraversable(false);
     }
 
 }
