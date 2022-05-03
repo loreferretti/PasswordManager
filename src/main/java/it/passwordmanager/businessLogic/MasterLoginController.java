@@ -1,6 +1,7 @@
 package it.passwordmanager.businessLogic;
 
 import it.passwordmanager.Launch;
+import it.passwordmanager.domainModel.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MasterLoginController implements Initializable {
@@ -35,7 +37,9 @@ public class MasterLoginController implements Initializable {
 
         loginController.setPassword(masterPassword);
 
-        if(loginController.authenticate()) {
+        List<Login> logins = loginController.getAll();
+
+        if(logins != null) {
 
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
@@ -45,6 +49,10 @@ public class MasterLoginController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("main_window.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
+
+            MainWindowController mainWindowController = fxmlLoader.getController();
+
+            mainWindowController.initialize(logins);
 
             stage.setTitle("Password Manager");
             stage.setScene(scene);
