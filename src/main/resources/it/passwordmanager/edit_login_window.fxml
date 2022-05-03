@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.passwordmanager.businessLogic.EditLoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #E5E5E5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.passwordmanager.businessLogic.fxmlController.EditLoginController">
     <TextField fx:id="editWebsite" layoutX="200.0" layoutY="48.0" promptText="website" style="-fx-border-color: #cbe9ff; -fx-border-width: 2;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="48.0" />
     <TextField fx:id="editUsername" layoutX="200.0" layoutY="140.0" promptText="username" style="-fx-border-color: #cbe9ff; -fx-border-width: 2;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="140.0" />
     <TextField fx:id="editPassword" layoutX="161.0" layoutY="211.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="234.0" style="-fx-border-width: 2; -fx-border-color: #cbe9ff;" promptText="password"/>
@@ -21,5 +21,5 @@
     <Button alignment="CENTER" layoutX="130.0" layoutY="313.0" mnemonicParsing="false" onAction="#onBackButtonClick" prefWidth="60.0" style="-fx-background-color: #cbe9ff;" text="Back" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="326.0" />
     <Button alignment="CENTER" layoutX="384.0" layoutY="313.0" mnemonicParsing="false" onAction="#onSaveButtonClick" prefWidth="60.0" style="-fx-background-color: #cbe9ff;" text="Save" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="326.0" />
     <Label fx:id="errorLabel" layoutX="332.0" layoutY="260.0" prefWidth="167.0" textFill="RED" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" />
-    <Button alignment="CENTER" layoutX="500.0" layoutY="226.0" mnemonicParsing="false" onAction="#onGeneratePasswordButtonClick" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #cbe9ff;" text="Generate Password" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="16.0" />
+    <Button alignment="CENTER" layoutX="500.0" layoutY="226.0" mnemonicParsing="false" onAction="#onGeneratePasswordButtonClick" prefHeight="42.0" prefWidth="80.0" style="-fx-background-color: #cbe9ff;" text="Generate Password" textAlignment="CENTER" wrapText="true" AnchorPane.rightAnchor="16.0" />
 </AnchorPane>
