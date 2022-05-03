@@ -1,4 +1,4 @@
-package it.passwordmanager.businessLogic;
+package it.passwordmanager.businessLogic.fxmlController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
