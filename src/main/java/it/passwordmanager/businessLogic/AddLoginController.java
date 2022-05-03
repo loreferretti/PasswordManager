@@ -118,7 +118,9 @@ public class AddLoginController {
 
         stage.close();
 
-        loginController.addLogin(new Login(website.getText(), username.getText(), password.getText()));
+        if(!loginController.addLogin(new Login(website.getText(), username.getText(), password.getText())))
+            System.out.println("Already existing");
+        //FIXME add something to display the existence of a login
 
         parentController.getAll();
 
