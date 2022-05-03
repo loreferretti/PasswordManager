@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FirstLoginSetMasterPasswordController implements Initializable {
@@ -44,7 +45,7 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
 
             loginController.setPassword(password.getText());
 
-//            loginController.storeAndEncryptPassword(reinsertedPassword.getText());
+            List<Login> logins = loginController.getAll();
 
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 
@@ -54,6 +55,10 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(Launch.class.getResource("main_window.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
+
+            MainWindowController mainWindowController = fxmlLoader.getController();
+
+            mainWindowController.initialize(logins);
 
             stage.setTitle("Password Manager");
             stage.setScene(scene);
