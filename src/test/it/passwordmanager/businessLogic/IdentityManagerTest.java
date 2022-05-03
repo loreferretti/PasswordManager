@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class IdentityManagerTest {
 
-    private final String URL = "passwordManagerTest.properties";
+    final String URL = "passwordManagerTest.properties";
 
     @Rule
     public TemporaryFolder folder= new TemporaryFolder();
 
     @Test
-    public void authenticate() throws IOException {
+    void authenticate() throws IOException {
         folder.create();
         File fileProp = folder.newFile(URL);
         IdentityManager im = new IdentityManager(fileProp.getPath());
