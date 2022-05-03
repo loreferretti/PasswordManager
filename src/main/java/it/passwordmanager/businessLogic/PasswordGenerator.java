@@ -4,7 +4,8 @@ import java.util.Random;
 
 public class PasswordGenerator {
 
-    public String generate(int length) {
+    public String generate() {
+        int length = 16;
         String alphabet = getAlphabet();
         String password = "";
         Random rand = new Random();
