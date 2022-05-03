@@ -57,6 +57,8 @@ public class MainWindowController implements Initializable {
         getAll();
 
 
+
+
         loginTable.setOnMouseClicked(event -> {
             if(event.getClickCount() == 2) {
                 showLoginClick();
@@ -68,6 +70,8 @@ public class MainWindowController implements Initializable {
                 showLoginClick();
             }
         });
+
+        searchField.textProperty().addListener((observableValue, oldValue, newValue) -> onSearchTextChanged(newValue));
 
     }
 
@@ -216,9 +220,7 @@ public class MainWindowController implements Initializable {
     }
 
     @FXML
-    protected void onSearchButtonClick(ActionEvent event) {
-
-        String searchString = searchField.getText();
+    public void onSearchTextChanged(String searchString) {
 
         setTableViewContent(loginController.searchByWebsite(searchString));
 
