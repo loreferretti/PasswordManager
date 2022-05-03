@@ -45,8 +45,7 @@ public class MainWindowController {
 
     public void initialize(List<Login> list) {
 
-        searchField.setFocusTraversable(false);
-        loginTable.setFocusTraversable(false);
+        disableFocus();
 
         loginController = LoginController.getInstance();
 
@@ -296,6 +295,12 @@ public class MainWindowController {
 
         }
 
+    }
+
+    @FXML
+    private void disableFocus() {
+        searchField.setFocusTraversable(false);
+        loginTable.setFocusTraversable(false);
     }
 
 }
