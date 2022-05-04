@@ -40,23 +40,24 @@ when the FXML file is loaded. For this to work, the controller class MUST HAVE A
 
 __) -->
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e5e5e5;"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.passwordmanager.businessLogic.fxmlController.MasterLoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #e5e5e5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.passwordmanager.businessLogic.fxmlController.MasterLoginController">
     <children>
         <Label alignment="CENTER" layoutX="-1.0" layoutY="18.0" prefHeight="50.0" prefWidth="600.0" style="-fx-font-weight: bold;" text="PASSWORD MANAGER" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
             <font>
                 <Font name="SansSerif Regular" size="27.0" />
             </font>
         </Label>
-        <Label alignment="CENTER" layoutX="-3.0" layoutY="105.0" prefHeight="30.0" prefWidth="600.0" text="INSERT THE MASTER PASSWORD HERE" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0" />
+        <Label alignment="CENTER" layoutX="-3.0" layoutY="105.0" prefHeight="30.0" prefWidth="600.0" text="Insert the Master Password" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+         <font>
+             <Font name="Calibri Bold" size="14.0" />
+         </font></Label>
         <PasswordField fx:id="password" layoutX="157.0" layoutY="177.0" onAction="#onEnterButtonClick" prefHeight="30.0" prefWidth="300.0" promptText="insert your password here..." style="-fx-border-color: #cbe9ff; -fx-border-width: 2;" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="180.0" />
         <Button fx:id="enter" layoutX="120.0" layoutY="274.0" mnemonicParsing="false" onAction="#onEnterButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #cbe9ff; -fx-border-color: #C5C5C5; -fx-border-width: 0;" text="ENTER" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="275.0" />
         <Button fx:id="quit" layoutX="391.0" layoutY="270.0" mnemonicParsing="false" onAction="#onQuitButtonClick" prefHeight="25.0" prefWidth="80.0" style="-fx-background-color: #cbe9ff; -fx-border-color: #C5C5C5; -fx-border-width: 0;" text="QUIT" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="275.0" />
         <Button fx:id="about" layoutX="544.0" layoutY="277.0" mnemonicParsing="false" onAction="#onAboutButtonClick" prefHeight="27.0" prefWidth="0.0" style="-fx-background-radius: 500,500; -fx-background-color: #cbe9ff;" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="275.0">
             <graphic>
                 <ImageView fitHeight="19.0" fitWidth="19.0">
-                    <Image url="@../passwordmanager/images/info_button_icon.png"/>
+                    <Image url="@../passwordmanager/images/info_button_icon.png" />
                 </ImageView>
             </graphic>
         </Button>
