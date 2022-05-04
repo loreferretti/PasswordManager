@@ -11,7 +11,7 @@
     <TextField fx:id="editWebsite" layoutX="200.0" layoutY="48.0" promptText="website" style="-fx-border-color: #cbe9ff; -fx-border-width: 2;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="48.0" />
     <TextField fx:id="editUsername" layoutX="200.0" layoutY="140.0" promptText="username" style="-fx-border-color: #cbe9ff; -fx-border-width: 2;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="140.0" />
     <TextField fx:id="editPassword" layoutX="161.0" layoutY="211.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="234.0" style="-fx-border-width: 2; -fx-border-color: #cbe9ff;" promptText="password"/>
-    <PasswordField fx:id="editPasswordMasked" layoutX="200.0" layoutY="232.0" promptText="password" style="-fx-border-width: 2; -fx-border-color: #cbe9ff;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="232.0" />
+    <PasswordField fx:id="editPasswordMasked" onAction="#onSaveButtonClick" layoutX="200.0" layoutY="232.0" promptText="password" style="-fx-border-width: 2; -fx-border-color: #cbe9ff;" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="175.0" AnchorPane.topAnchor="232.0" />
 
 
     <CheckBox fx:id="showPassword" layoutX="507.0" layoutY="234.0" mnemonicParsing="false" prefHeight="24.0" text="Show" textFill="#1093f2" AnchorPane.rightAnchor="110.0" />
