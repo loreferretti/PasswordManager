@@ -9,7 +9,7 @@ public class LoginController {
 
     private static LoginController controller;
 
-    private Dao<Login> proxy;
+    private Dao<Login> loginDao;
     private String password;
 
     public static LoginController getInstance() {
@@ -20,7 +20,7 @@ public class LoginController {
     }
 
     private LoginController() {
-        this.proxy = new AuthenticationProxy();
+        this.loginDao = new AuthenticationProxy();
     }
 
     public void setPassword(String password) {
@@ -28,23 +28,23 @@ public class LoginController {
     }
 
     public List<Login> getAll() {
-        return proxy.getAll(password);
+        return loginDao.getAll(password);
     }
 
     public boolean addLogin(Login login) {
-        return proxy.create(password, login);
+        return loginDao.create(password, login);
     }
 
     public boolean updateLogin(Login login) {
-        return proxy.update(password, login);
+        return loginDao.update(password, login);
     }
 
     public void deleteLogin(Login login) {
-        proxy.delete(login);
+        loginDao.delete(login);
     }
 
     public List<Login> searchByWebsite(String searchString) {
-        return proxy.read(searchString);
+        return loginDao.read(searchString);
     }
 
 }
