@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runners.MethodSorters;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,14 +25,13 @@ public class LoginDaoTest {
     private static final String dbPath = String.format("jdbc:sqlite:%s", dbName);
     private static final String password = "MyPassword";
     private static final String paddedPassword = new String(EncryptionService.padding(password));
-
-    @Rule
-    private static TemporaryFolder folder= new TemporaryFolder();
+    private static File tempFile;
 
     @BeforeAll
-    public static void init() throws IOException, SQLException {
-        folder.create();
-        folder.newFile(dbName);
+    public static void init() throws SQLException {
+
+        tempFile = new File("db-login-test.db");
+
         Connection connection = ConnectionFactory.getConnection(dbPath);
         if(connection != null) {
             String queryTable = "create table if not exists\"Login\" (\n" +
@@ -135,7 +135,8 @@ public class LoginDaoTest {
             PreparedStatement pstat = connection.prepareStatement(queryDropTable);
             pstat.execute();
         }
-        //FIXME doesnt't delete file
-        folder.delete();
+
+        assertTrue(tempFile.delete());
     }
+    
 }
