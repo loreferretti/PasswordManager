@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.paint.Color;
@@ -29,6 +30,12 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
     private PasswordField reinsertedPassword;
     @FXML
     private Label label;
+    @FXML
+    private Button enter;
+    @FXML
+    private Button quit;
+    @FXML
+    private Button about;
 
     @Override
     public void initialize(URL location, ResourceBundle resource) {
@@ -37,12 +44,14 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
 
         disableFocus();
 
+        password.textProperty().addListener((observableValue, oldValue, newValue) -> onPasswordTextChanged(newValue));
+        reinsertedPassword.textProperty().addListener((observableValue, oldValue, newValue) -> onReinsertedPasswordTextChanged(newValue));
+        enter.setDisable(true);
+
     }
 
     @FXML
     public void onEnterButtonClick(ActionEvent event) throws IOException {
-
-        if(password.getText().equals(reinsertedPassword.getText())) {
 
             if(password.getText().length() >= 8) {
 
@@ -78,17 +87,6 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
                 reinsertedPassword.clear();
             }
 
-
-        }
-        else {
-
-            label.setTextFill(Color.RED);
-            label.setText("Passwords do not match. Try again!");
-
-            password.clear();
-            reinsertedPassword.clear();
-
-        }
     }
 
     @FXML
@@ -121,6 +119,66 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
         password.setFocusTraversable(false);
         reinsertedPassword.setFocusTraversable(false);
         label.setFocusTraversable(false);
+        enter.setFocusTraversable(false);
+        quit.setFocusTraversable(false);
+        about.setFocusTraversable(false);
+    }
+
+    @FXML
+    public void enableFocus() {
+        password.setFocusTraversable(true);
+        reinsertedPassword.setFocusTraversable(true);
+        enter.setFocusTraversable(true);
+        quit.setFocusTraversable(true);
+        about.setFocusTraversable(true);
+    }
+
+    @FXML
+    public void onPasswordTextChanged(String pass) {
+        if(pass.length() > 0) {
+            enableFocus();
+            if(!pass.equals(reinsertedPassword.getText()) && reinsertedPassword.getText().length() > 7){
+                label.setTextFill(Color.RED);
+                label.setText("Passwords do not match");
+                enter.setDisable(true);
+            }
+            else{
+                if(pass.length() > 7) {
+                    if(!pass.equals(reinsertedPassword.getText())) {
+                        label.setTextFill(Color.RED);
+                        label.setText("Passwords do not match");
+                        enter.setDisable(true);
+                    }
+                    else {
+                        label.setText("");
+                        enter.setDisable(false);
+                    }
+                }
+                else {
+                    label.setTextFill(Color.RED);
+                    label.setText("Password is too short, minimum 8 characters");
+                    enter.setDisable(true);
+                }
+            }
+        }
+        else{
+            enter.setDisable(true);
+            disableFocus();
+            label.setText("");
+        }
+    }
+
+    @FXML
+    public void onReinsertedPasswordTextChanged(String reinsertedPass) {
+        if(reinsertedPass.equals(password.getText()) && reinsertedPass.length() > 7) {
+            label.setText("");
+            enter.setDisable(false);
+        }
+        else {
+            enter.setDisable(true);
+            label.setTextFill(Color.RED);
+            label.setText("Passwords do not match");
+        }
     }
 
 }
