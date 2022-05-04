@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EncryptionServiceTest {
+public class EncryptionServiceTest {
 
     @Test
-    void encryptDecrypt() {
+    public void encryptDecrypt() {
         String keyVal = "myPassword";
         String field = "This is the field to be encrypt";
         String fieldEncrypted = EncryptionService.encrypt(keyVal, field);

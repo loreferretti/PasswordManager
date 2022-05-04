@@ -18,18 +18,18 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-class LoginDaoTest {
+public class LoginDaoTest {
 
-    static final String dbName = "db-login-test.db";
-    static final String dbPath = String.format("jdbc:sqlite:%s", dbName);
-    static final String password = "MyPassword";
-    static final String paddedPassword = new String(EncryptionService.padding(password));
+    private static final String dbName = "db-login-test.db";
+    private static final String dbPath = String.format("jdbc:sqlite:%s", dbName);
+    private static final String password = "MyPassword";
+    private static final String paddedPassword = new String(EncryptionService.padding(password));
 
     @Rule
-    static TemporaryFolder folder= new TemporaryFolder();
+    private static TemporaryFolder folder= new TemporaryFolder();
 
     @BeforeAll
-    static void init() throws IOException, SQLException {
+    public static void init() throws IOException, SQLException {
         folder.create();
         folder.newFile(dbName);
         Connection connection = ConnectionFactory.getConnection(dbPath);
@@ -56,7 +56,7 @@ class LoginDaoTest {
     }
 
     @Test
-    void getAll() {
+    public void getAll() {
         LoginDao loginDao = new LoginDao(dbPath);
         List<Login> logins;
         logins = loginDao.getAll(password);
@@ -68,7 +68,7 @@ class LoginDaoTest {
     }
 
     @Test
-    void create() {
+    public void create() {
         LoginDao loginDao = new LoginDao(dbPath);
         Login login = new Login("anotherWebsite", "anotherUsername", "anotherPassword");
         List<Login> logins;
@@ -86,7 +86,7 @@ class LoginDaoTest {
     }
 
     @Test
-    void read() {
+    public void read() {
         LoginDao loginDao = new LoginDao(dbPath);
         loginDao.getAll(password);
         String toSearch = "some";
@@ -100,7 +100,7 @@ class LoginDaoTest {
     }
 
     @Test
-    void update() {
+    public void update() {
         LoginDao loginDao = new LoginDao(dbPath);
         List<Login> logins = loginDao.getAll(password);
         logins.get(0).setWebsite("someBeatifulWebsite");
@@ -116,7 +116,7 @@ class LoginDaoTest {
     }
 
     @Test
-    void delete() {
+    public void delete() {
         LoginDao loginDao = new LoginDao(dbPath);
         List<Login> logins = loginDao.getAll(password);
         loginDao.delete(logins.get(1));
@@ -128,7 +128,7 @@ class LoginDaoTest {
     }
 
     @AfterAll
-    static void teardown() throws SQLException {
+    public static void teardown() throws SQLException {
         Connection connection = ConnectionFactory.getConnection(dbPath);
         if(connection != null) {
             String queryDropTable = "drop table Login;";

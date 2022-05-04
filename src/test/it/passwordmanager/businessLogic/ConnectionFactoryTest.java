@@ -13,20 +13,17 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ConnectionFactoryTest {
+public class ConnectionFactoryTest {
 
     @Rule
-    TemporaryFolder folder= new TemporaryFolder();
+    private TemporaryFolder folder= new TemporaryFolder();
 
     @Test
-    void getConnection() throws IOException, SQLException {
+    public void getConnection() throws IOException, SQLException {
         folder.create();
         File db = folder.newFile("db-login-test.db");
         String path = "jdbc:sqlite:db-login-test.db";
         Connection connection = ConnectionFactory.getConnection(path);
         assertNotNull(connection);
-
-
-
     }
 }

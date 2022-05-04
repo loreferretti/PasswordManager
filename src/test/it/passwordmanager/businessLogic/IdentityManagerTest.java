@@ -9,15 +9,15 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IdentityManagerTest {
+public class IdentityManagerTest {
 
-    final String URL = "passwordManagerTest.properties";
+    private final String URL = "passwordManagerTest.properties";
 
     @Rule
-    public TemporaryFolder folder= new TemporaryFolder();
+    private TemporaryFolder folder= new TemporaryFolder();
 
     @Test
-    void authenticate() throws IOException {
+    public void authenticate() throws IOException {
         folder.create();
         File fileProp = folder.newFile(URL);
         IdentityManager im = new IdentityManager(fileProp.getPath());
