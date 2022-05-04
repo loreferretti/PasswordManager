@@ -3,10 +3,11 @@ package it.passwordmanager.dao;
 import it.passwordmanager.businessLogic.ConnectionFactory;
 import it.passwordmanager.businessLogic.EncryptionService;
 import it.passwordmanager.domainModel.Login;
+import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.*;
 import org.junit.Rule;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.rules.TemporaryFolder;
+import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -16,18 +17,19 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class LoginDaoTest {
 
-    final String dbName = "db-login-test.db";
-    final String dbPath = String.format("jdbc:sqlite:%s", dbName);
-    final String password = "MyPassword";
-    final String paddedPassword = new String(EncryptionService.padding(password));
+    static final String dbName = "db-login-test.db";
+    static final String dbPath = String.format("jdbc:sqlite:%s", dbName);
+    static final String password = "MyPassword";
+    static final String paddedPassword = new String(EncryptionService.padding(password));
 
     @Rule
     static TemporaryFolder folder= new TemporaryFolder();
 
-    @BeforeEach
-    void init() throws IOException, SQLException {
+    @BeforeAll
+    static void init() throws IOException, SQLException {
         folder.create();
         folder.newFile(dbName);
         Connection connection = ConnectionFactory.getConnection(dbPath);
@@ -37,7 +39,7 @@ class LoginDaoTest {
                     " \"website\" TEXT NOT NULL,\n" +
                     " \"username\" TEXT NOT NULL,\n" +
                     " \"password\" TEXT NOT NULL,\n" +
-                    " UNIQUE(\"website\",\"username\",\"password\"),\n" +
+                    " UNIQUE(\"website\",\"username\"),\n" +
                     " PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                     ");";
             PreparedStatement pstatTable = connection.prepareStatement(queryTable);
@@ -91,23 +93,42 @@ class LoginDaoTest {
         List<Login> logins;
         logins = loginDao.read(toSearch);
         assertEquals(1, logins.size());
-        assertEquals(logins.get(0).getWebsite(), "someWebsite");
-        assertEquals(logins.get(0).getUsername(), "someUsername");
-        assertEquals(logins.get(0).getPassword(), "somePassword");
+        assertEquals(logins.get(0).getWebsite(), "someBeatifulWebsite");
+        assertEquals(logins.get(0).getUsername(), "someBeatifulUsername");
+        assertEquals(logins.get(0).getPassword(), "someBeatifulPassword");
 
     }
 
     @Test
     void update() {
+        LoginDao loginDao = new LoginDao(dbPath);
+        List<Login> logins = loginDao.getAll(password);
+        logins.get(0).setWebsite("someBeatifulWebsite");
+        logins.get(0).setUsername("someBeatifulUsername");
+        logins.get(0).setPassword("someBeatifulPassword");
+        loginDao.update(password, logins.get(0));
+        assertEquals(1, logins.size());
+        assertEquals(logins.get(0).getWebsite(), "someBeatifulWebsite");
+        assertEquals(logins.get(0).getUsername(), "someBeatifulUsername");
+        assertEquals(logins.get(0).getPassword(), "someBeatifulPassword");
+
 
     }
 
     @Test
     void delete() {
+        LoginDao loginDao = new LoginDao(dbPath);
+        List<Login> logins = loginDao.getAll(password);
+        loginDao.delete(logins.get(1));
+        logins = loginDao.getAll(password);
+        assertEquals(1, logins.size());
+        assertEquals(logins.get(0).getWebsite(), "someWebsite");
+        assertEquals(logins.get(0).getUsername(), "someUsername");
+        assertEquals(logins.get(0).getPassword(), "somePassword");
     }
 
-    @AfterEach
-    void teardown() throws SQLException {
+    @AfterAll
+    static void teardown() throws SQLException {
         Connection connection = ConnectionFactory.getConnection(dbPath);
         if(connection != null) {
             String queryDropTable = "drop table Login;";
