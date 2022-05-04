@@ -37,6 +37,9 @@ public class MasterLoginController implements Initializable {
         loginController = LoginController.getInstance();
 
         disableFocus();
+        enter.setDisable(true);
+
+        password.textProperty().addListener((observableValue, oldValue, newValue) -> onPasswordTextChanged(newValue));
 
     }
 
@@ -123,6 +126,26 @@ public class MasterLoginController implements Initializable {
         enter.setFocusTraversable(false);
         quit.setFocusTraversable(false);
         about.setFocusTraversable(false);
+    }
+
+    @FXML
+    public void enableFocus() {
+        password.setFocusTraversable(true);
+        enter.setFocusTraversable(true);
+        quit.setFocusTraversable(true);
+        about.setFocusTraversable(true);
+    }
+
+    @FXML
+    public void onPasswordTextChanged(String password) {
+        if(password.length() > 0) {
+            enableFocus();
+            enter.setDisable(password.length() < 8);
+        }
+        else {
+            disableFocus();
+        }
+
     }
 
 }
