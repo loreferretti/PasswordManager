@@ -1,16 +1,14 @@
 package it.passwordmanager.dao;
 
-import it.passwordmanager.businessLogic.ConnectionFactory;
 import it.passwordmanager.businessLogic.EncryptionService;
 import it.passwordmanager.domainModel.Login;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.*;
-import org.junit.Rule;
-import org.junit.rules.TemporaryFolder;
 import org.junit.runners.MethodSorters;
 
-import java.io.IOException;
+import java.io.File;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -25,14 +23,12 @@ public class LoginDaoTest {
     private static final String password = "MyPassword";
     private static final String paddedPassword = new String(EncryptionService.padding(password));
 
-    @Rule
-    private static TemporaryFolder folder= new TemporaryFolder();
+    private static File tempFile;
 
     @BeforeAll
-    public static void init() throws IOException, SQLException {
-        folder.create();
-        folder.newFile(dbName);
-        Connection connection = ConnectionFactory.getConnection(dbPath);
+    public static void init() throws SQLException {
+        tempFile = new File(dbName);
+        Connection connection = DriverManager.getConnection(dbPath);
         if(connection != null) {
             String queryTable = "create table if not exists\"Login\" (\n" +
                     " \"id\" INTEGER,\n" +
@@ -51,6 +47,7 @@ public class LoginDaoTest {
             pstatInsert.setString(2, EncryptionService.encrypt(paddedPassword, "someUsername"));
             pstatInsert.setString(3, EncryptionService.encrypt(paddedPassword, "somePassword"));
             pstatInsert.execute();
+            connection.close();
         }
 
     }
@@ -129,13 +126,13 @@ public class LoginDaoTest {
 
     @AfterAll
     public static void teardown() throws SQLException {
-        Connection connection = ConnectionFactory.getConnection(dbPath);
+        Connection connection = DriverManager.getConnection(dbPath);
         if(connection != null) {
             String queryDropTable = "drop table Login;";
             PreparedStatement pstat = connection.prepareStatement(queryDropTable);
             pstat.execute();
+            connection.close();
         }
-        //FIXME doesnt't delete file
-        folder.delete();
+        tempFile.delete();
     }
 }
