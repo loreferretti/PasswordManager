@@ -23,4 +23,11 @@ public class EncryptionServiceTest {
         byte[] salt = Base64.getDecoder().decode("eOOJqULjj6U=");
         assertEquals(passwordEncrypted, Base64.getEncoder().encodeToString(EncryptionService.getEncryptedPassword(password,salt)));
     }
+
+    @Test
+    public void padding() {
+        String key = "test";
+        String paddingKey = "testabcdefghijkl";
+        assertEquals(paddingKey, new String(EncryptionService.padding(key)));
+    }
 }
