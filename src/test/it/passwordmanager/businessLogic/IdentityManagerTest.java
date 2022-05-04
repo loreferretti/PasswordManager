@@ -24,5 +24,6 @@ public class IdentityManagerTest {
         String password = "myPassword";
         im.authenticate(password);
         assertTrue(im.authenticate(password));
+        folder.delete();
     }
 }
