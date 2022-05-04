@@ -21,8 +21,6 @@ import java.io.IOException;
 
 public class AddLoginController {
 
-    //FIXME fix the focus on the elements of the scene
-
     private LoginController loginController;
     private MainWindowController parentController;
 
