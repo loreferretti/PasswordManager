@@ -14,7 +14,7 @@ class IdentityManagerTest {
     final String URL = "passwordManagerTest.properties";
 
     @Rule
-    public TemporaryFolder folder= new TemporaryFolder();
+    public TemporaryFolder folder = new TemporaryFolder();
 
     @Test
     void authenticate() throws IOException {
