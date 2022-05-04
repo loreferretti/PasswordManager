@@ -8,11 +8,11 @@ import java.util.List;
 
 public class AuthenticationProxy implements Dao<Login> {
     private LoginDao loginDao;
-    private boolean alreadyAuth = false;
+    private boolean authenticated = false;
 
     @Override
     public List<Login> getAll(String password) {
-        if(!alreadyAuth) {
+        if(!authenticated) {
             if(authenticate(password))
                 return loginDao.getAll(password);
             else
@@ -53,7 +53,7 @@ public class AuthenticationProxy implements Dao<Login> {
 
         if(im.authenticate(password)) {
             loginDao = new LoginDao("jdbc:sqlite:db-login.db");
-            alreadyAuth = true;
+            authenticated = true;
             authentication = true;
         }
 
