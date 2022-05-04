@@ -149,10 +149,10 @@ public class AddLoginController {
 
     @FXML
     private void disableFocus() {
-        website.setFocusTraversable(false);
-        username.setFocusTraversable(false);
+//        website.setFocusTraversable(false);
+//        username.setFocusTraversable(false);
         password.setFocusTraversable(false);
-        maskedPassword.setFocusTraversable(false);
+//        maskedPassword.setFocusTraversable(false);
         showPassword.setFocusTraversable(false);
         errorLabel.setFocusTraversable(false);
     }

@@ -68,10 +68,10 @@ public class EditLoginController{
 
     @FXML
     private void disableFocus() {
-        editWebsite.setFocusTraversable(false);
-        editUsername.setFocusTraversable(false);
+//        editWebsite.setFocusTraversable(false);
+//        editUsername.setFocusTraversable(false);
         editPassword.setFocusTraversable(false);
-        editPasswordMasked.setFocusTraversable(false);
+//        editPasswordMasked.setFocusTraversable(false);
         showPassword.setFocusTraversable(false);
         errorLabel.setFocusTraversable(false);
     }
