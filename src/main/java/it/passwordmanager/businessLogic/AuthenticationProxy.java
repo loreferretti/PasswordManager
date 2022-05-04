@@ -13,37 +13,31 @@ public class AuthenticationProxy implements Dao<Login> {
     @Override
     public List<Login> getAll(String password) {
         if(!authenticated) {
-            if(authenticate(password))
-                return loginDao.getAll(password);
-            else
+            if(!authenticate(password))
                 return null;
         }
-        else
-            return loginDao.getAll(password);
+        return loginDao.getAll(password);
     }
 
     @Override
     public boolean create(String password, Login login) {
-
-        return loginDao.create(password, login);
+            return authenticated && loginDao.create(password, login);
     }
 
     @Override
     public List<Login> read(Object obj) {
-
-        return loginDao.read(obj);
+            return authenticated ? loginDao.read(obj) : null;
     }
 
     @Override
     public boolean update(String password, Login login) {
-
-        return loginDao.update(password, login);
+            return authenticated && loginDao.update(password, login);
     }
 
     @Override
     public void delete(Login login) {
-
-        loginDao.delete(login);
+        if(authenticated)
+            loginDao.delete(login);
     }
 
     private boolean authenticate(String password) {
