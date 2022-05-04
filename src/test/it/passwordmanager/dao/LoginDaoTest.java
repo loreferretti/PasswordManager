@@ -37,7 +37,7 @@ class LoginDaoTest {
                     " \"website\" TEXT NOT NULL,\n" +
                     " \"username\" TEXT NOT NULL,\n" +
                     " \"password\" TEXT NOT NULL,\n" +
-                    " UNIQUE(\"website\",\"username\",\"password\"),\n" +
+                    " UNIQUE(\"website\",\"username\"),\n" +
                     " PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
                     ");";
             PreparedStatement pstatTable = connection.prepareStatement(queryTable);
