@@ -9,6 +9,8 @@ import java.util.List;
 public class AuthenticationProxy implements Dao<Login> {
     private LoginDao loginDao;
     private boolean authenticated = false;
+    private final String propertiesPath = "src/main/resources/.passwordManager.properties";
+    private final String URL = "jdbc:sqlite:db-login.db";
 
     @Override
     public List<Login> getAll(String password) {
@@ -42,11 +44,11 @@ public class AuthenticationProxy implements Dao<Login> {
 
     private boolean authenticate(String password) {
 
-        IdentityManager im = new IdentityManager("src/main/resources/.passwordManager.properties");
+        IdentityManager im = new IdentityManager(propertiesPath);
         boolean authentication = false;
 
         if(im.authenticate(password)) {
-            loginDao = new LoginDao("jdbc:sqlite:db-login.db");
+            loginDao = new LoginDao(URL);
             authenticated = true;
             authentication = true;
         }
