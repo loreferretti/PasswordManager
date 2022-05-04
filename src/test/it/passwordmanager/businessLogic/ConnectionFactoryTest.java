@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConnectionFactoryTest {
 
     @Rule
-    TemporaryFolder folder= new TemporaryFolder();
+    TemporaryFolder folder = new TemporaryFolder();
 
     @Test
     void getConnection() throws IOException, SQLException {
@@ -25,8 +25,5 @@ class ConnectionFactoryTest {
         String path = "jdbc:sqlite:db-login-test.db";
         Connection connection = ConnectionFactory.getConnection(path);
         assertNotNull(connection);
-
-
-
     }
 }
