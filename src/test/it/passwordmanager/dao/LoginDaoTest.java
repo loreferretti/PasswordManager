@@ -30,14 +30,15 @@ public class LoginDaoTest {
         tempFile = new File(dbName);
         Connection connection = DriverManager.getConnection(dbPath);
         if(connection != null) {
-            String queryTable = "create table if not exists\"Login\" (\n" +
-                    " \"id\" INTEGER,\n" +
-                    " \"website\" TEXT NOT NULL,\n" +
-                    " \"username\" TEXT NOT NULL,\n" +
-                    " \"password\" TEXT NOT NULL,\n" +
-                    " UNIQUE(\"website\",\"username\"),\n" +
-                    " PRIMARY KEY(\"id\" AUTOINCREMENT)\n" +
-                    ");";
+            String queryTable = """
+                    create table if not exists"Login" (
+                     "id" INTEGER,
+                     "website" TEXT NOT NULL,
+                     "username" TEXT NOT NULL,
+                     "password" TEXT NOT NULL,
+                     UNIQUE("website","username"),
+                     PRIMARY KEY("id" AUTOINCREMENT)
+                    );""";
             PreparedStatement pstatTable = connection.prepareStatement(queryTable);
             pstatTable.execute();
 
@@ -54,9 +55,9 @@ public class LoginDaoTest {
 
     @Test
     public void getAll() {
-        LoginDao loginDao = new LoginDao(dbPath);
+        LoginDao loginDao = new LoginDao(password, dbPath);
         List<Login> logins;
-        logins = loginDao.getAll(password);
+        logins = loginDao.getAll();
         assertEquals(1, logins.size());
         assertEquals(logins.get(0).getWebsite(), "someWebsite");
         assertEquals(logins.get(0).getUsername(), "someUsername");
@@ -66,11 +67,11 @@ public class LoginDaoTest {
 
     @Test
     public void create() {
-        LoginDao loginDao = new LoginDao(dbPath);
+        LoginDao loginDao = new LoginDao(password, dbPath);
         Login login = new Login("anotherWebsite", "anotherUsername", "anotherPassword");
         List<Login> logins;
-        if(loginDao.create(password, login)) {
-            logins = loginDao.getAll(password);
+        if(loginDao.create(login)) {
+            logins = loginDao.getAll();
             assertEquals(2, logins.size());
             assertEquals(logins.get(0).getWebsite(), "someWebsite");
             assertEquals(logins.get(0).getUsername(), "someUsername");
@@ -84,8 +85,8 @@ public class LoginDaoTest {
 
     @Test
     public void read() {
-        LoginDao loginDao = new LoginDao(dbPath);
-        loginDao.getAll(password);
+        LoginDao loginDao = new LoginDao(password, dbPath);
+        loginDao.getAll();
         String toSearch = "some";
         List<Login> logins;
         logins = loginDao.read(toSearch);
@@ -98,12 +99,12 @@ public class LoginDaoTest {
 
     @Test
     public void update() {
-        LoginDao loginDao = new LoginDao(dbPath);
-        List<Login> logins = loginDao.getAll(password);
+        LoginDao loginDao = new LoginDao(password, dbPath);
+        List<Login> logins = loginDao.getAll();
         logins.get(0).setWebsite("someBeatifulWebsite");
         logins.get(0).setUsername("someBeatifulUsername");
         logins.get(0).setPassword("someBeatifulPassword");
-        loginDao.update(password, logins.get(0));
+        loginDao.update(logins.get(0));
         assertEquals(1, logins.size());
         assertEquals(logins.get(0).getWebsite(), "someBeatifulWebsite");
         assertEquals(logins.get(0).getUsername(), "someBeatifulUsername");
@@ -114,10 +115,10 @@ public class LoginDaoTest {
 
     @Test
     public void delete() {
-        LoginDao loginDao = new LoginDao(dbPath);
-        List<Login> logins = loginDao.getAll(password);
+        LoginDao loginDao = new LoginDao(password, dbPath);
+        List<Login> logins = loginDao.getAll();
         loginDao.delete(logins.get(1));
-        logins = loginDao.getAll(password);
+        logins = loginDao.getAll();
         assertEquals(1, logins.size());
         assertEquals(logins.get(0).getWebsite(), "someWebsite");
         assertEquals(logins.get(0).getUsername(), "someUsername");
