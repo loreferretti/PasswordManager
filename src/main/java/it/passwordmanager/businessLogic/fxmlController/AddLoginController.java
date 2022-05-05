@@ -127,9 +127,10 @@ public class AddLoginController {
                 errorLabel.setTextFill(Color.RED);
                 errorLabel.setText("This login already exists!");
 
-                website.clear();
+                /*website.clear();
                 username.clear();
-                password.clear();
+                password.clear();*/
+                //TODO add a check on the database when the view focus is passed from username to password
             }
             else{
 
