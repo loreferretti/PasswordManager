@@ -48,7 +48,7 @@ public class MasterLoginController implements Initializable {
 
         String masterPassword = password.getText();
 
-        loginController.setPassword(masterPassword);
+        loginController.init(masterPassword);
 
         List<Login> logins = loginController.getAll();
 

@@ -55,7 +55,7 @@ public class FirstLoginSetMasterPasswordController implements Initializable {
 
             if(password.getText().length() >= 8) {
 
-                loginController.setPassword(password.getText());
+                loginController.init(password.getText());
 
                 List<Login> logins = loginController.getAll();
 
