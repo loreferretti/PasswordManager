@@ -73,12 +73,12 @@ public class LoginDaoTest {
         if(loginDao.create(login)) {
             logins = loginDao.getAll();
             assertEquals(2, logins.size());
-            assertEquals(logins.get(0).getWebsite(), "someWebsite");
-            assertEquals(logins.get(0).getUsername(), "someUsername");
-            assertEquals(logins.get(0).getPassword(), "somePassword");
-            assertEquals(logins.get(1).getWebsite(), "anotherWebsite");
-            assertEquals(logins.get(1).getUsername(), "anotherUsername");
-            assertEquals(logins.get(1).getPassword(), "anotherPassword");
+            assertEquals("someWebsite", logins.get(0).getWebsite());
+            assertEquals("someUsername", logins.get(0).getUsername());
+            assertEquals("somePassword", logins.get(0).getPassword());
+            assertEquals("anotherWebsite", logins.get(1).getWebsite());
+            assertEquals("anotherUsername", logins.get(1).getUsername());
+            assertEquals("anotherPassword", logins.get(1).getPassword());
         }
 
     }
@@ -91,9 +91,9 @@ public class LoginDaoTest {
         List<Login> logins;
         logins = loginDao.read(toSearch);
         assertEquals(1, logins.size());
-        assertEquals(logins.get(0).getWebsite(), "someBeatifulWebsite");
-        assertEquals(logins.get(0).getUsername(), "someBeatifulUsername");
-        assertEquals(logins.get(0).getPassword(), "someBeatifulPassword");
+        assertEquals("someBeatifulWebsite", logins.get(0).getWebsite());
+        assertEquals("someBeatifulUsername", logins.get(0).getUsername());
+        assertEquals("someBeatifulPassword", logins.get(0).getPassword());
 
     }
 
@@ -106,9 +106,9 @@ public class LoginDaoTest {
         logins.get(0).setPassword("someBeatifulPassword");
         loginDao.update(logins.get(0));
         assertEquals(1, logins.size());
-        assertEquals(logins.get(0).getWebsite(), "someBeatifulWebsite");
-        assertEquals(logins.get(0).getUsername(), "someBeatifulUsername");
-        assertEquals(logins.get(0).getPassword(), "someBeatifulPassword");
+        assertEquals( "someBeatifulWebsite", logins.get(0).getWebsite());
+        assertEquals("someBeatifulUsername", logins.get(0).getUsername());
+        assertEquals("someBeatifulPassword", logins.get(0).getPassword());
 
 
     }
@@ -120,9 +120,9 @@ public class LoginDaoTest {
         loginDao.delete(logins.get(1));
         logins = loginDao.getAll();
         assertEquals(1, logins.size());
-        assertEquals(logins.get(0).getWebsite(), "someWebsite");
-        assertEquals(logins.get(0).getUsername(), "someUsername");
-        assertEquals(logins.get(0).getPassword(), "somePassword");
+        assertEquals("someWebsite", logins.get(0).getWebsite());
+        assertEquals("someUsername", logins.get(0).getUsername());
+        assertEquals("somePassword", logins.get(0).getPassword());
     }
 
     @AfterAll
