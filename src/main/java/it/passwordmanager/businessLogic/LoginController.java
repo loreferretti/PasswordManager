@@ -10,7 +10,9 @@ public class LoginController {
     private static LoginController controller;
 
     private Dao<Login> loginDao;
-    private String password;
+    private final String propertiesPath = "src/main/resources/.passwordManager.properties";
+    private final String URL = "jdbc:sqlite:db-login.db";
+
 
     public static LoginController getInstance() {
         if (controller == null)
@@ -19,28 +21,24 @@ public class LoginController {
         return controller;
     }
 
-    private LoginController() {
-        this.loginDao = new AuthenticationProxy();
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void init(String password) {
+        this.loginDao = new AuthenticationProxy(password, propertiesPath, URL);
     }
 
     public List<Login> getAll() {
-        return loginDao.getAll(password);
+        return loginDao.getAll();
     }
 
     public boolean addLogin(Login login) {
-        return loginDao.create(password, login);
+        return loginDao.create(login);
     }
 
     public boolean updateLogin(Login login) {
-        return loginDao.update(password, login);
+        return loginDao.update(login);
     }
 
-    public void deleteLogin(Login login) {
-        loginDao.delete(login);
+    public boolean deleteLogin(Login login) {
+        return loginDao.delete(login);
     }
 
     public List<Login> searchByWebsite(String searchString) {

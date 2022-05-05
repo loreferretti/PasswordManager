@@ -7,52 +7,55 @@ import it.passwordmanager.domainModel.Login;
 import java.util.List;
 
 public class AuthenticationProxy implements Dao<Login> {
-    private LoginDao loginDao;
-    private boolean authenticated = false;
-    private final String propertiesPath = "src/main/resources/.passwordManager.properties";
-    private final String URL = "jdbc:sqlite:db-login.db";
 
-    @Override
-    public List<Login> getAll(String password) {
-        if(!authenticated) {
-            if(!authenticate(password))
-                return null;
-        }
-        return loginDao.getAll(password);
+    private LoginDao loginDao;
+    private final String password;
+    private boolean authenticated = false;
+    private final String propertiesPath;
+    private final String URL;
+
+    public AuthenticationProxy(final String password, final String propertiesPath, final String URL) {
+        this.password = password;
+        this.propertiesPath = propertiesPath;
+        this.URL = URL;
     }
 
     @Override
-    public boolean create(String password, Login login) {
-            return authenticated && loginDao.create(password, login);
+    public List<Login> getAll() {
+        return authenticate(password) ? loginDao.getAll() : null;
+    }
+
+    @Override
+    public boolean create(Login login) {
+        return authenticate(password) && loginDao.create(login);
     }
 
     @Override
     public List<Login> read(Object obj) {
-            return authenticated ? loginDao.read(obj) : null;
+        return authenticate(password) ? loginDao.read(obj) : null;
     }
 
     @Override
-    public boolean update(String password, Login login) {
-            return authenticated && loginDao.update(password, login);
+    public boolean update(Login login) {
+        return authenticate(password) && loginDao.update(login);
     }
 
     @Override
-    public void delete(Login login) {
-        if(authenticated)
-            loginDao.delete(login);
+    public boolean delete(Login login) {
+        return authenticate(password) && loginDao.delete(login);
     }
 
-    private boolean authenticate(String password) {
+    private boolean authenticate(String passwd) {
 
         IdentityManager im = new IdentityManager(propertiesPath);
-        boolean authentication = false;
 
-        if(im.authenticate(password)) {
-            loginDao = new LoginDao(URL);
-            authenticated = true;
-            authentication = true;
+        if(!authenticated) {
+            if(im.authenticate(password)) {
+                loginDao = new LoginDao(password, URL);
+                authenticated = true;
+            }
         }
-
-        return authentication;
+        return password.equals(passwd) && authenticated;
     }
+
 }

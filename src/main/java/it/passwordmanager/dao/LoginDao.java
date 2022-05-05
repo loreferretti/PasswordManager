@@ -11,14 +11,18 @@ import java.util.stream.Collectors;
 
 public class LoginDao implements Dao<Login> {
 
-    private ArrayList<Login> logins;
+
+    private final String password;
     private final String URL;
-    public LoginDao(final String URL) {
+    private ArrayList<Login> logins;
+
+    public LoginDao(final String password, final String URL) {
+        this.password = password;
         this.URL = URL;
     }
 
     @Override
-    public List<Login> getAll(String password) {
+    public List<Login> getAll() {
         String query = "select id, website, username, password from Login;";
         try (Connection connection = DriverManager.getConnection(URL);
              PreparedStatement pstat = connection.prepareStatement(query)) {
@@ -26,7 +30,7 @@ public class LoginDao implements Dao<Login> {
             ResultSet rs = pstat.executeQuery();
             logins = new ArrayList<>();
             while(rs.next()) {
-                Login login = extractLogin(password, rs);
+                Login login = extractLogin(rs);
                 logins.add(login);
             }
             return logins;
@@ -39,7 +43,7 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public boolean create(String password, Login login) {
+    public boolean create(Login login) {
         String query = "insert into Login (website, username, password) values (?, ?, ?);";
         boolean valid = true;
         try (Connection connection = DriverManager.getConnection(URL);
@@ -65,7 +69,7 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public boolean update(String password, Login login) {
+    public boolean update(Login login) {
         String query = "update Login set website = ?, username = ?, password = ? where id = ?;";
         boolean valid = true;
         try(Connection connection = DriverManager.getConnection(URL);
@@ -87,22 +91,25 @@ public class LoginDao implements Dao<Login> {
     }
 
     @Override
-    public void delete(Login login) {
+    public boolean delete(Login login) {
         String query = "delete from Login where id = ?;";
+        boolean valid = false;
         try(Connection connection = DriverManager.getConnection(URL);
             PreparedStatement pstat = connection.prepareStatement(query)) {
 
             pstat.setString(1, Integer.toString(login.getId()));
             pstat.execute();
+            valid = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        return valid;
 
     }
 
-    private Login extractLogin(String pass, ResultSet rs) throws SQLException {
+    private Login extractLogin(ResultSet rs) throws SQLException {
 
-        String paddedPassword = new String(EncryptionService.padding(pass));
+        String paddedPassword = new String(EncryptionService.padding(password));
         String website = EncryptionService.decrypt(paddedPassword,rs.getString("website"));
         String username = EncryptionService.decrypt(paddedPassword, rs.getString("username"));
         String password = EncryptionService.decrypt(paddedPassword, rs.getString("password"));
