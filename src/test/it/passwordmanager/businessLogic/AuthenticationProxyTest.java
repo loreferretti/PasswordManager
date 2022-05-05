@@ -67,7 +67,12 @@ public class AuthenticationProxyTest {
     @Test
     public void getAll() {
         AuthenticationProxy proxy = new AuthenticationProxy(rightPassword, fileProperties.getPath(), dbPath);
-        assertNotNull(proxy.getAll());
+        List<Login> logins = proxy.getAll();
+        assertNotNull(logins);
+        assertEquals(1, logins.size());
+        assertEquals("someWebsite", logins.get(0).getWebsite());
+        assertEquals("someUsername", logins.get(0).getUsername());
+        assertEquals("somePassword", logins.get(0).getPassword());
         proxy = new AuthenticationProxy(wrongPassword, fileProperties.getPath(), dbPath);
         assertNull(proxy.getAll());
     }
@@ -79,13 +84,25 @@ public class AuthenticationProxyTest {
         assertFalse(proxy.create(login));
         proxy = new AuthenticationProxy(rightPassword, fileProperties.getPath(), dbPath);
         assertTrue(proxy.create(login));
+        List<Login> logins = proxy.getAll();
+        assertEquals(2, logins.size());
+        assertEquals("someWebsite", logins.get(0).getWebsite());
+        assertEquals("someUsername", logins.get(0).getUsername());
+        assertEquals("somePassword", logins.get(0).getPassword());
+        assertEquals("anotherWebsite", logins.get(1).getWebsite());
+        assertEquals("anotherUsername", logins.get(1).getUsername());
+        assertEquals("anotherPassword", logins.get(1).getPassword());
     }
 
     @Test
     public void read() {
         AuthenticationProxy proxy = new AuthenticationProxy(rightPassword, fileProperties.getPath(), dbPath);
-        proxy.getAll();
+        List<Login> logins = proxy.getAll();
         assertNotNull(proxy.read("some"));
+        assertEquals(1, logins.size());
+        assertEquals("someBeatifulWebsite", logins.get(0).getWebsite());
+        assertEquals("someBeatifulUsername", logins.get(0).getUsername());
+        assertEquals("someBeatifulPassword", logins.get(0).getPassword());
         proxy = new AuthenticationProxy(wrongPassword, fileProperties.getPath(), dbPath);
         proxy.getAll();
         assertNull(proxy.read("some"));
@@ -99,6 +116,10 @@ public class AuthenticationProxyTest {
         logins.get(0).setUsername("someBeatifulUsername");
         logins.get(0).setPassword("someBeatifulPassword");
         assertTrue(proxy.update(logins.get(0)));
+        assertEquals(1, logins.size());
+        assertEquals( "someBeatifulWebsite", logins.get(0).getWebsite());
+        assertEquals("someBeatifulUsername", logins.get(0).getUsername());
+        assertEquals("someBeatifulPassword", logins.get(0).getPassword());
         proxy = new AuthenticationProxy(wrongPassword, fileProperties.getPath(), dbPath);
         assertFalse(proxy.update(logins.get(0)));
     }
@@ -108,8 +129,13 @@ public class AuthenticationProxyTest {
         AuthenticationProxy proxy = new AuthenticationProxy(rightPassword, fileProperties.getPath(), dbPath);
         List<Login> logins = proxy.getAll();
         assertTrue(proxy.delete(logins.get(1)));
+        logins = proxy.getAll();
+        assertEquals(1, logins.size());
+        assertEquals("someWebsite", logins.get(0).getWebsite());
+        assertEquals("someUsername", logins.get(0).getUsername());
+        assertEquals("somePassword", logins.get(0).getPassword());
         proxy = new AuthenticationProxy(wrongPassword, fileProperties.getPath(), dbPath);
-        assertFalse(proxy.delete(logins.get(1)));
+        assertFalse(proxy.delete(logins.get(0)));
     }
 
     @AfterAll
