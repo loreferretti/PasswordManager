@@ -5,18 +5,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #e5e5e5;"
-            xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="it.passwordmanager.businessLogic.fxmlController.WrongLoginDialogController">
-    <Label alignment="CENTER" layoutX="50.0" layoutY="31.0" prefHeight="50.0" prefWidth="300.0"
-           text="The password is wrong!" textAlignment="CENTER">
+<AnchorPane prefHeight="120.0" prefWidth="300.0" style="-fx-background-color: #e5e5e5;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.passwordmanager.businessLogic.fxmlController.WrongLoginDialogController">
+    <Label alignment="CENTER" layoutY="10.0" prefHeight="50.0" prefWidth="300.0" text="The password is wrong!" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
         <font>
-            <Font size="20.0"/>
+            <Font size="20.0" />
         </font>
     </Label>
-    <Button alignment="CENTER" layoutX="160.0" layoutY="126.0" mnemonicParsing="false" onAction="#onRetryButtonClick"
-            prefHeight="25.0" prefWidth="80.0" text="RETRY">
+    <Button alignment="CENTER" layoutX="160.0" layoutY="75.0" mnemonicParsing="false" onAction="#onRetryButtonClick" prefHeight="25.0" prefWidth="80.0" text="RETRY" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="110.0" AnchorPane.rightAnchor="110.0">
         <style>
             -fx-background-radius: 15,15;
             -fx-text-fill: white;
